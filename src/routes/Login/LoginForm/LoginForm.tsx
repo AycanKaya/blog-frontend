@@ -2,9 +2,9 @@ import { FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { CssVarsProvider } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
+import { Link } from "react-router-dom";
 
 export interface LoginValues {
   email: string;
@@ -26,6 +26,9 @@ export default function LoginForm(props: LoginProps) {
     initialValues: { email: "", password: "" },
     onSubmit: props.onSubmit,
   });
+
+  if (localStorage.getItem("jwToken") != null)
+    return <Link to="/">Giriş Yaptınız !!!</Link>;
 
   return (
     <FormikProvider value={formik}>
