@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\api",
+    "\\src\\routes",
+    "\\src\\routes\\Register"
+  ],
+  "SelectedNode": "\\src\\routes\\Register\\Register.tsx",
+  "PreviewInSolutionExplorer": false
+}
