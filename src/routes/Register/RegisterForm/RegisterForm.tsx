@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Copyright } from "@mui/icons-material";
+import { ref } from "yup";
 
 export interface RegisterValues {
   username: string;
@@ -27,6 +28,10 @@ const validationSchema: yup.SchemaOf<RegisterValues> = yup.object({
   email: yup.string().email().required(),
   username: yup.string().required(),
   password: yup.string().required().min(6),
+  confirmPassword: yup
+    .string()
+    .required()
+    .oneOf([ref("password")], "Passwords do not match"),
 });
 
 interface RegisterProps {
@@ -38,7 +43,11 @@ const theme = createTheme();
 export default function RegisterForm(props: RegisterProps) {
   const formik = useFormik<RegisterValues>({
     validationSchema,
-    initialValues: { email: "", password: "", username: "" },
+    initialValues: {
+      email: "",
+      password: "",
+      username: "",
+    },
     onSubmit: props.onSubmit,
   });
 
@@ -117,6 +126,27 @@ export default function RegisterForm(props: RegisterProps) {
                   value={formik.values.password}
                 />
               </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="confirmPassword"
+                  type="password"
+                  label="confirmPassword"
+                  variant="outlined"
+                  error={!!(formik.errors.password && formik.touched.password)}
+                  helperText={
+                    formik.errors.password && formik.touched.password
+                      ? formik.errors.password
+                      : undefined
+                  }
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                />
+              </Grid>
+
               <Grid item xs={12}>
                 <FormControlLabel
                   control={

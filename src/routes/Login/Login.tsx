@@ -1,12 +1,16 @@
-import login from "../../api/service/UserService";
-import Home from "../Home";
-import LoginForm from "./LoginForm";
-import { LoginValues } from "./LoginForm/LoginForm";
-
+/*
+import { useNavigate } from "react-router-dom";
+import { post, get } from "../../api/axios";
 export default function Login() {
+  let navigate = useNavigate();
+
   async function handleSubmit(values: LoginValues) {
-    const user = await login(values);
-    localStorage.setItem("jwToken", user.jwToken);
+    const user = await post("/Account/authenticate", values);
+    if (await get("/Account/isValid")) {
+      localStorage.setItem("jwToken", user.jwToken);
+      navigate("../");
+    }
   }
   return <LoginForm onSubmit={handleSubmit} />;
 }
+*/
