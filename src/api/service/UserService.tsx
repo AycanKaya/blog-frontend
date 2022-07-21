@@ -11,9 +11,7 @@ export default function Login() {
   async function handleSubmit(values: LoginValues) {
     const user = await post("/Account/authenticate", values);
     localStorage.setItem("jwToken", user.jwToken);
-    if (await get("/Account/isValid")) {
-      navigate("../");
-    }
+    navigate("../blogPage");
   }
   return <LoginForm onSubmit={handleSubmit} />;
 }
