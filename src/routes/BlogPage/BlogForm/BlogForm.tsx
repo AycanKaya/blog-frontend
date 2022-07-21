@@ -18,10 +18,13 @@ export interface PostValues {
   title: string;
   content: string;
 }
+//enum değere çevir.
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Logout"];
 
 const ResponsiveAppBar = () => {
+  const navigate = useNavigate();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -36,9 +39,16 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const myFunction = (event: React.MouseEvent<HTMLElement>) => {
+  const handleLogout = (
+    event: React.MouseEvent<HTMLElement>,
+    setting: string
+  ) => {
     setAnchorElUser(event.currentTarget);
-    localStorage.removeItem("jwToken");
+    if (setting === "Logout") {
+      console.log(event);
+      localStorage.removeItem("jwToken");
+      navigate("../login");
+    }
   };
 
   const handleCloseNavMenu = () => {
@@ -163,7 +173,10 @@ const ResponsiveAppBar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography onClick={myFunction} textAlign="center">
+                  <Typography
+                    onClick={(event) => handleLogout(event, setting)}
+                    textAlign="center"
+                  >
                     {setting}
                   </Typography>
                 </MenuItem>
@@ -175,4 +188,5 @@ const ResponsiveAppBar = () => {
     </AppBar>
   );
 };
+
 export default ResponsiveAppBar;

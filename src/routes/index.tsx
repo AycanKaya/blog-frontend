@@ -4,6 +4,7 @@ import Home from "./Home";
 import Login from "./Login";
 import { Register } from "./Register";
 import BlogPage from "./BlogPage";
+import AdminPage from "./AdminPage";
 
 export default function Routes() {
   return (
@@ -13,6 +14,7 @@ export default function Routes() {
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="blogPage" element={<BlogPage />} />
+        <Route path="adminPage" element={<AdminPage />} />
       </Route>
     </BaseRoutes>
   );
