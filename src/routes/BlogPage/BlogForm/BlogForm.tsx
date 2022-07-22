@@ -20,7 +20,7 @@ export interface PostValues {
 }
 //enum değere çevir.
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Logout"];
+const settings = ["Profile", "Account", "Logout", "Dashboard"];
 
 const ResponsiveAppBar = () => {
   const navigate = useNavigate();
@@ -45,8 +45,13 @@ const ResponsiveAppBar = () => {
   ) => {
     setAnchorElUser(event.currentTarget);
     if (setting === "Logout") {
-      console.log(event);
       localStorage.removeItem("jwToken");
+      navigate("../login");
+    }
+    if (setting === "Dashboard") {
+      navigate("../adminPage");
+    }
+    if (setting === "Profile") {
       navigate("../login");
     }
   };
