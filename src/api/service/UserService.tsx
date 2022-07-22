@@ -11,7 +11,13 @@ export default function Login() {
   async function handleSubmit(values: LoginValues) {
     const user = await post("/Account/authenticate", values);
     localStorage.setItem("jwToken", user.jwToken);
-    navigate("../blogPage");
+    const role = await get("/Account/GetCurrentUserRole");
+    console.log(role, role === "Admin");
+    if (role === "Admin") {
+      navigate("../adminPage");
+    } else {
+      navigate("../blogPage");
+    }
   }
   return <LoginForm onSubmit={handleSubmit} />;
 }
