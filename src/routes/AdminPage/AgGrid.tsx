@@ -6,6 +6,7 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import { get } from "../../api/axios";
 import SaveIcon from "@mui/icons-material/Save";
 import { Button, FormControl, InputLabel, MenuItem } from "@mui/material";
+import PropTypes from "prop-types";
 
 interface IRow {
   userID: string;
@@ -19,6 +20,10 @@ interface IRow {
   phoneNumber: string;
   contry: string;
   address: string;
+}
+
+interface Props {
+  rowArray: IRow[];
 }
 
 export default function GenerateRows() {
@@ -56,7 +61,8 @@ export default function GenerateRows() {
     { field: "surname" },
     {
       field: "role",
-      cellRenderer: (params: any) => userRoleCellRenderer(params, rowArray),
+      cellRenderer: (params: any, Props: Props) =>
+        userRoleCellRenderer(params, Props),
     },
     { field: "gender" },
     { field: "birthDay" },
@@ -83,18 +89,19 @@ export default function GenerateRows() {
 
   const [role, setRole] = React.useState("");
   console.log(rowArray);
+
   const handleChange = (
     event: SelectChangeEvent,
     id: string,
-    dataArray: IRow[]
+    rowArray: IRow[]
   ) => {
     // rowData'yı geçici array'e koy (array.from)
     //array'ı map ile kontrol et
     // setRole(event.target.value as string);
 
-    console.log(dataArray);
+    console.log(rowArray + "SDFASDFASD");
 
-    const tempArray = Array.from(dataArray);
+    const tempArray = Array.from(rowArray);
     tempArray.map((row) => {
       if (row.userID == id) {
         row.role = event.target.value;
@@ -105,7 +112,10 @@ export default function GenerateRows() {
     setRowArray(tempArray);
   };
 
-  function userRoleCellRenderer(params: any, dataArray: IRow[]) {
+  function userRoleCellRenderer(params: any, Props: Props) {
+    const { rowArray } = Props;
+    console.log(rowArray + "SDFASDFASD");
+
     return (
       <>
         <FormControl fullWidth>
@@ -116,7 +126,7 @@ export default function GenerateRows() {
             value={params.data.role}
             label="role"
             onChange={(event) =>
-              handleChange(event, params.data.userID, dataArray)
+              handleChange(event, params.data.userID, rowArray)
             }
           >
             <MenuItem value={"Admin"}>Admin</MenuItem>
