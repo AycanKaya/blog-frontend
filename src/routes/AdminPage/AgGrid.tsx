@@ -22,12 +22,20 @@ interface IRow {
   address: string;
 }
 
-interface Props {
-  rowArray: IRow[];
-}
-
 export default function GenerateRows() {
   const [rowArray, setRowArray] = useState<IRow[]>([]);
+
+  function getAllUserInfo() {
+    get("/Account/GetAllUserInfo").then((response: IRow[]) => {
+      console.log("RESPONSE ", response);
+      setRowArray(response);
+    });
+  }
+
+  useEffect(() => console.log("tekrar sey yapicaz", rowArray), [rowArray]);
+  useEffect(() => {
+    getAllUserInfo();
+  }, []);
 
   function convertDate(strDate: string) {
     var year = strDate.substr(0, 4);
@@ -36,33 +44,22 @@ export default function GenerateRows() {
     return year + "/" + mounth + "/" + day;
   }
 
-  function getOneUserInfo() {
-    get("/Account/GetUserInfo").then((response: IRow) => {
-      setRowArray([response]);
-    });
-  }
-  function getAllUserInfo() {
-    get("/Account/GetAllUserInfo").then((response: IRow[]) => {
-      setRowArray(response);
-    });
-  }
-
   rowArray?.forEach(function (value) {
     value.birthDay = convertDate(value.birthDay);
   });
 
-  useEffect(() => {
-    getAllUserInfo();
-  }, []);
-
-  const [columnDefs] = useState([
-    { field: "userName" },
+  const columnDefs = [
+    { field: "userName", editable: true },
     { field: "name" },
     { field: "surname" },
     {
       field: "role",
-      cellRenderer: (params: any, Props: Props) =>
-        userRoleCellRenderer(params, Props),
+      editable: true,
+      cellRenderer: (params: any) => {
+        console.log("params***************");
+        console.log(params);
+        return userRoleCellRenderer(params.data);
+      },
     },
     { field: "gender" },
     { field: "birthDay" },
@@ -85,49 +82,43 @@ export default function GenerateRows() {
         );
       },
     },
-  ]);
-
-  const [role, setRole] = React.useState("");
-  console.log(rowArray);
+  ];
 
   const handleChange = (
     event: SelectChangeEvent,
-    id: string,
-    rowArray: IRow[]
+    params: any,
+    rowArray: any
   ) => {
-    // rowData'yı geçici array'e koy (array.from)
-    //array'ı map ile kontrol et
-    // setRole(event.target.value as string);
-
-    console.log(rowArray + "SDFASDFASD");
-
-    const tempArray = Array.from(rowArray);
-    tempArray.map((row) => {
-      if (row.userID == id) {
-        row.role = event.target.value;
-      }
-    });
-    console.log(tempArray);
-
-    setRowArray(tempArray);
+    console.log("ROW ARRAY:");
+    console.log(rowArray);
+    setRowArray(
+      rowArray.map((row: any) => {
+        console.log(row.userID);
+        console.log(params.userID);
+        if (row.userID === params.userID) {
+          return {
+            ...row,
+            role: event.target.value,
+          };
+        }
+        return row;
+      })
+    );
   };
 
-  function userRoleCellRenderer(params: any, Props: Props) {
-    const { rowArray } = Props;
-    console.log(rowArray + "SDFASDFASD");
-
+  function userRoleCellRenderer(params: any) {
+    console.log("UserRoleRenderer: " + rowArray);
+    console.log(rowArray);
     return (
       <>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Role</InputLabel>
           <Select
             labelId="demo-simple-select-label"
-            id={params.data.userID}
-            value={params.data.role}
+            id={params.userID}
+            value={params.role}
             label="role"
-            onChange={(event) =>
-              handleChange(event, params.data.userID, rowArray)
-            }
+            onChange={(event) => handleChange(event, params, rowArray)}
           >
             <MenuItem value={"Admin"}>Admin</MenuItem>
             <MenuItem value={"Basic"}>Basic</MenuItem>
@@ -139,7 +130,7 @@ export default function GenerateRows() {
   }
 
   function handleUserUpdate(event: any, data: any) {}
-
+  console.log(rowArray);
   return (
     <div className="ag-theme-alpine" style={{ height: 400, width: "100%" }}>
       <AgGridReact
