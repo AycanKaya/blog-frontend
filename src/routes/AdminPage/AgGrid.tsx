@@ -6,6 +6,7 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import { get, post, put } from "../../api/axios";
 import SaveIcon from "@mui/icons-material/Save";
 import { Button, FormControl, InputLabel, MenuItem } from "@mui/material";
+import FormPropsTextFields from "./TextCellEditör";
 
 interface IRow {
   userID: string;
@@ -37,6 +38,16 @@ export default function GenerateRows() {
     });
   }
 
+  function handleUserUpdate(event: any, userId: string) {
+    rowArray.map((row: any) => {
+      if (row.userID === userId) {
+        const newarray = row;
+        const { userID, ...requestBody } = newarray;
+        updateUser(userId, requestBody);
+      }
+    });
+  }
+
   useEffect(() => {
     getAllUserInfo();
   }, []);
@@ -53,7 +64,14 @@ export default function GenerateRows() {
   });
 
   const columnDefs = [
-    { field: "userName", editable: true, width: 125 },
+    {
+      field: "userName",
+      editable: true,
+      width: 150,
+      cellRenderer: (params: any) => {
+        return FormPropsTextFields(params.data);
+      },
+    },
     { field: "name", width: 125 },
     { field: "surname", editable: true, width: 125 },
     {
@@ -61,6 +79,7 @@ export default function GenerateRows() {
       width: 125,
       editable: true,
       cellRenderer: (params: any) => {
+        console.log(params);
         return userRoleCellRenderer(params.data);
       },
     },
@@ -88,16 +107,6 @@ export default function GenerateRows() {
       },
     },
   ];
-  function handleUserUpdate(event: any, userId: string) {
-    rowArray.map((row: any) => {
-      if (row.userID === userId) {
-        const newarray = row;
-        const { userID, ...requestBody } = newarray;
-        console.log(requestBody);
-        updateUser(userId, requestBody);
-      }
-    });
-  }
 
   const handleChange = (
     event: SelectChangeEvent,
@@ -142,14 +151,16 @@ export default function GenerateRows() {
   }
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 400, width: "100%" }}>
-      <AgGridReact
-        rowHeight={80}
-        rowData={rowArray}
-        columnDefs={columnDefs}
-        animateRows={true}
-        rowSelection="multiple"
-      ></AgGridReact>
-    </div>
+    <>
+      <div className="ag-theme-alpine" style={{ height: 400, width: "100%" }}>
+        <AgGridReact
+          rowHeight={100}
+          rowData={rowArray}
+          columnDefs={columnDefs}
+          animateRows={true}
+          rowSelection="multiple"
+        ></AgGridReact>
+      </div>
+    </>
   );
 }
