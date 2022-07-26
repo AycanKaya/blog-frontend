@@ -7,6 +7,15 @@ import { get, post, put } from "../../api/axios";
 import SaveIcon from "@mui/icons-material/Save";
 import { Button, FormControl, InputLabel, MenuItem } from "@mui/material";
 import TextCellEditör from "./TextCellEditör";
+import RoleCellEditör from "./RoleCellEditör";
+import NameCellEditör from "./NameCellEditör";
+import SurnameCellEditör from "./SurnameCellEditör";
+import GenderSelectEditör from "./GenderSelectEditör";
+import DateCellEditör from "./DateCellEditör";
+import AgeCellEditör from "./AgeCellEditör";
+import PhoneNumberCellEditör from "./PhoneNumberCellEditör";
+import CountryCellEditör from "./CountryCellEditör";
+import AddressCellEditör from "./AddressCellEditör";
 
 interface IRow {
   userID: string;
@@ -59,23 +68,71 @@ export default function GenerateRows() {
         return TextCellEditör(params.data);
       },
     },
-    { field: "name", width: 125 },
-    { field: "surname", editable: true, width: 125 },
+    {
+      field: "name",
+      width: 150,
+      cellRenderer: (params: any) => {
+        return NameCellEditör(params.data);
+      },
+    },
+    {
+      field: "surname",
+      editable: true,
+      width: 150,
+      cellRenderer: (params: any) => {
+        return SurnameCellEditör(params.data);
+      },
+    },
     {
       field: "role",
       width: 125,
       editable: true,
       cellRenderer: (params: any) => {
-        console.log(params);
-        return userRoleCellRenderer(params.data);
+        return RoleCellEditör(params.data);
       },
     },
-    { field: "gender", width: 125 },
-    { field: "birthDay", width: 125 },
-    { field: "age", width: 90 },
-    { field: "phoneNumber", width: 125 },
-    { field: "contry", width: 125 },
-    { field: "address", width: 125 },
+    {
+      field: "gender",
+      width: 130,
+      cellRenderer: (params: any) => {
+        return GenderSelectEditör(params.data);
+      },
+    },
+    {
+      field: "birthDay",
+      width: 240,
+      cellRenderer: (params: any) => {
+        return DateCellEditör(params.data);
+      },
+    },
+    {
+      field: "age",
+      width: 90,
+      cellRenderer: (params: any) => {
+        return AgeCellEditör(params.data);
+      },
+    },
+    {
+      field: "phoneNumber",
+      width: 150,
+      cellRenderer: (params: any) => {
+        return PhoneNumberCellEditör(params.data);
+      },
+    },
+    {
+      field: "contry",
+      width: 210,
+      cellRenderer: (params: any) => {
+        return CountryCellEditör(params.data);
+      },
+    },
+    {
+      field: "address",
+      width: 200,
+      cellRenderer: (params: any) => {
+        return AddressCellEditör(params.data);
+      },
+    },
     {
       field: "button",
       cellRenderer: (params: any) => {
@@ -92,49 +149,6 @@ export default function GenerateRows() {
       },
     },
   ];
-
-  const handleChange = (
-    event: SelectChangeEvent,
-    params: any,
-    rowArray: any
-  ) => {
-    params.role = event.target.value;
-    setRowArray(
-      rowArray.map((row: any) => {
-        if (row.userID === params.userID) {
-          return {
-            ...row,
-            role: event.target.value,
-          };
-        }
-        return row;
-      })
-    );
-  };
-
-  function userRoleCellRenderer(params: any) {
-    return (
-      <>
-        <div>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Role</InputLabel>
-            <Select
-              size="small"
-              labelId="demo-simple-select-label"
-              id={params.userID}
-              value={params.role}
-              label="role"
-              onChange={(event) => handleChange(event, params, rowArray)}
-            >
-              <MenuItem value={"Admin"}>Admin</MenuItem>
-              <MenuItem value={"Basic"}>Basic</MenuItem>
-              <MenuItem value={""}>''</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-      </>
-    );
-  }
 
   return (
     <>
