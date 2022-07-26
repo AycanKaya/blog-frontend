@@ -16,6 +16,7 @@ import AgeCellEditör from "./AgeCellEditör";
 import PhoneNumberCellEditör from "./PhoneNumberCellEditör";
 import CountryCellEditör from "./CountryCellEditör";
 import AddressCellEditör from "./AddressCellEditör";
+import ButtonEditör from "./ButtonEditör";
 
 interface IRow {
   userID: string;
@@ -39,22 +40,6 @@ export default function GenerateRows() {
       setRowArray(response);
     });
   }
-
-  function updateUser(userId: string, body: string) {
-    const url = "/Admin/Dashboard?id=" + userId;
-    put(url, body).then((respone: any) => {
-      console.log(respone);
-    });
-  }
-
-  function handleUpdate(params: any) {
-    console.log(params);
-    const newarray = params;
-    const userId = params.userID;
-    const { userID, ...requestBody } = newarray;
-    updateUser(userId, requestBody);
-  }
-
   useEffect(() => {
     getAllUserInfo();
   }, []);
@@ -136,16 +121,7 @@ export default function GenerateRows() {
     {
       field: "button",
       cellRenderer: (params: any) => {
-        return (
-          <Button
-            color="secondary"
-            onClick={(event: any) => handleUpdate(params.data)}
-            startIcon={<SaveIcon />}
-            variant="contained"
-          >
-            Save
-          </Button>
-        );
+        return ButtonEditör(params);
       },
     },
   ];
