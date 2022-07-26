@@ -53,22 +53,23 @@ export default function GenerateRows() {
   });
 
   const columnDefs = [
-    { field: "userName", editable: true },
-    { field: "name" },
-    { field: "surname", editable: true },
+    { field: "userName", editable: true, width: 125 },
+    { field: "name", width: 125 },
+    { field: "surname", editable: true, width: 125 },
     {
       field: "role",
+      width: 125,
       editable: true,
       cellRenderer: (params: any) => {
         return userRoleCellRenderer(params.data);
       },
     },
-    { field: "gender" },
-    { field: "birthDay" },
-    { field: "age" },
-    { field: "phoneNumber" },
-    { field: "contry" },
-    { field: "address" },
+    { field: "gender", width: 125 },
+    { field: "birthDay", width: 125 },
+    { field: "age", width: 90 },
+    { field: "phoneNumber", width: 125 },
+    { field: "contry", width: 125 },
+    { field: "address", width: 125 },
     {
       field: "button",
       cellRenderer: (params: any) => {
@@ -119,20 +120,23 @@ export default function GenerateRows() {
   function userRoleCellRenderer(params: any) {
     return (
       <>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Role</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id={params.userID}
-            value={params.role}
-            label="role"
-            onChange={(event) => handleChange(event, params, rowArray)}
-          >
-            <MenuItem value={"Admin"}>Admin</MenuItem>
-            <MenuItem value={"Basic"}>Basic</MenuItem>
-            <MenuItem value={""}>''</MenuItem>
-          </Select>
-        </FormControl>
+        <div className="center">
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+            <Select
+              size="small"
+              labelId="demo-simple-select-label"
+              id={params.userID}
+              value={params.role}
+              label="role"
+              onChange={(event) => handleChange(event, params, rowArray)}
+            >
+              <MenuItem value={"Admin"}>Admin</MenuItem>
+              <MenuItem value={"Basic"}>Basic</MenuItem>
+              <MenuItem value={""}>''</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
       </>
     );
   }
@@ -140,6 +144,7 @@ export default function GenerateRows() {
   return (
     <div className="ag-theme-alpine" style={{ height: 400, width: "100%" }}>
       <AgGridReact
+        rowHeight={80}
         rowData={rowArray}
         columnDefs={columnDefs}
         animateRows={true}
