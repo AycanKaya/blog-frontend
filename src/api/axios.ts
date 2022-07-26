@@ -19,9 +19,16 @@ export async function post(url: string, body?: any) {
   const { data } = await axiosInstance.post(url, body, { headers });
   return data;
 }
+
 export async function get(url: string, body?: string) {
   var headers = getHeaders();
   const { data } = await axiosInstance.get(url, { headers });
+  return data;
+}
+
+export async function put(url: string, body?: string) {
+  var headers = getHeaders();
+  const { data } = await axiosInstance.put(url, body, { headers });
   return data;
 }
 export default axiosInstance;
