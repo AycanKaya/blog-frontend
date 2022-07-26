@@ -18,7 +18,6 @@ export interface PostValues {
   title: string;
   content: string;
 }
-//enum değere çevir.
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Logout", "Dashboard"];
 
