@@ -6,7 +6,7 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import { get, post, put } from "../../api/axios";
 import SaveIcon from "@mui/icons-material/Save";
 import { Button, FormControl, InputLabel, MenuItem } from "@mui/material";
-import FormPropsTextFields from "./TextCellEditör";
+import TextCellEditör from "./TextCellEditör";
 
 interface IRow {
   userID: string;
@@ -38,30 +38,17 @@ export default function GenerateRows() {
     });
   }
 
-  function handleUserUpdate(event: any, userId: string) {
-    rowArray.map((row: any) => {
-      if (row.userID === userId) {
-        const newarray = row;
-        const { userID, ...requestBody } = newarray;
-        updateUser(userId, requestBody);
-      }
-    });
+  function handleUpdate(params: any) {
+    console.log(params);
+    const newarray = params;
+    const userId = params.userID;
+    const { userID, ...requestBody } = newarray;
+    updateUser(userId, requestBody);
   }
 
   useEffect(() => {
     getAllUserInfo();
   }, []);
-
-  function convertDate(strDate: string) {
-    var year = strDate.substr(0, 4);
-    var mounth = strDate.substr(5, 2);
-    var day = strDate.substr(8, 2);
-    return year + "-" + mounth + "-" + day;
-  }
-
-  rowArray?.forEach(function (value) {
-    // value.birthDay = convertDate(value.birthDay.toString());
-  });
 
   const columnDefs = [
     {
@@ -69,7 +56,7 @@ export default function GenerateRows() {
       editable: true,
       width: 150,
       cellRenderer: (params: any) => {
-        return FormPropsTextFields(params.data);
+        return TextCellEditör(params.data);
       },
     },
     { field: "name", width: 125 },
@@ -95,9 +82,7 @@ export default function GenerateRows() {
         return (
           <Button
             color="secondary"
-            onClick={(event: any) =>
-              handleUserUpdate(event, params.node.data.userID)
-            }
+            onClick={(event: any) => handleUpdate(params.data)}
             startIcon={<SaveIcon />}
             variant="contained"
           >
@@ -113,6 +98,7 @@ export default function GenerateRows() {
     params: any,
     rowArray: any
   ) => {
+    params.role = event.target.value;
     setRowArray(
       rowArray.map((row: any) => {
         if (row.userID === params.userID) {
@@ -129,7 +115,7 @@ export default function GenerateRows() {
   function userRoleCellRenderer(params: any) {
     return (
       <>
-        <div className="center">
+        <div>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Role</InputLabel>
             <Select
