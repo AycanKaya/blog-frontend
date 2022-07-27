@@ -14,7 +14,7 @@ export default function AddressCellEditör(params: any) {
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
+        "& .MuiTextField-root": { m: 1, width: "20ch" },
       }}
       noValidate
       autoComplete="off"
@@ -22,9 +22,8 @@ export default function AddressCellEditör(params: any) {
       <div>
         <TextField
           id="outlined-multiline-static"
-          label="Multiline"
           multiline
-          rows={4}
+          rows={3}
           defaultValue={params.address}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleChange(event)
