@@ -20,7 +20,6 @@ export default function NameCellEditör(params: any) {
         <TextField
           required
           id="outlined-required"
-          label="Name"
           defaultValue={params.name}
           //  value={event?.target.value}
           onChange={(event) => handleChange(event)}

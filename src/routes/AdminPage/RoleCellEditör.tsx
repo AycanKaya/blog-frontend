@@ -15,18 +15,16 @@ export default function RoleCellEditör(params: any) {
     <>
       <div>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Role</InputLabel>
           <Select
             size="small"
             labelId="demo-simple-select-label"
             id={params.userID}
             value={role}
-            label="role"
             onChange={(event) => handleChange(event, params)}
           >
             <MenuItem value={"Admin"}>Admin</MenuItem>
             <MenuItem value={"Basic"}>Basic</MenuItem>
-            <MenuItem value={""}>''</MenuItem>
+            <MenuItem value={"Editor"}>Editor</MenuItem>
           </Select>
         </FormControl>
       </div>

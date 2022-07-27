@@ -16,12 +16,10 @@ export default function GenderSelectEditör(params: any) {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={gender}
-          label=""
           onChange={handleChange}
         >
           <MenuItem value={0}>Kadın</MenuItem>

@@ -20,7 +20,6 @@ export default function PhoneNumberCellEditör(params: any) {
         <TextField
           required
           id="outlined-required"
-          label=""
           defaultValue={params.phoneNumber}
           //  value={event?.target.value}
           onChange={(event) => handleChange(event)}

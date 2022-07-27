@@ -17,7 +17,6 @@ export default function DateCellEditör(params: any) {
     <Stack component="form" noValidate spacing={3}>
       <TextField
         id="date"
-        label="Birthday"
         type="date"
         defaultValue={setDefaultValue(params.birthDay)}
         sx={{ width: 220 }}

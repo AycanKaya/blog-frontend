@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
-import { get, post, put } from "../../api/axios";
-import SaveIcon from "@mui/icons-material/Save";
-import { Button, FormControl, InputLabel, MenuItem } from "@mui/material";
+import { get } from "../../api/axios";
 import TextCellEditör from "./TextCellEditör";
 import RoleCellEditör from "./RoleCellEditör";
 import NameCellEditör from "./NameCellEditör";
@@ -17,6 +14,7 @@ import PhoneNumberCellEditör from "./PhoneNumberCellEditör";
 import CountryCellEditör from "./CountryCellEditör";
 import AddressCellEditör from "./AddressCellEditör";
 import ButtonEditör from "./ButtonEditör";
+import "./style/style.css";
 
 interface IRow {
   userID: string;
@@ -47,7 +45,7 @@ export default function GenerateRows() {
   const columnDefs = [
     {
       field: "userName",
-      editable: true,
+
       width: 150,
       cellRenderer: (params: any) => {
         return TextCellEditör(params.data);
@@ -62,7 +60,7 @@ export default function GenerateRows() {
     },
     {
       field: "surname",
-      editable: true,
+
       width: 150,
       cellRenderer: (params: any) => {
         return SurnameCellEditör(params.data);
@@ -71,14 +69,14 @@ export default function GenerateRows() {
     {
       field: "role",
       width: 125,
-      editable: true,
+
       cellRenderer: (params: any) => {
         return RoleCellEditör(params.data);
       },
     },
     {
       field: "gender",
-      width: 130,
+      width: 140,
       cellRenderer: (params: any) => {
         return GenderSelectEditör(params.data);
       },
@@ -128,9 +126,9 @@ export default function GenerateRows() {
 
   return (
     <>
-      <div className="ag-theme-alpine" style={{ height: 400, width: "100%" }}>
+      <div className="ag-theme-alpine" style={{ height: 600, width: "100%" }}>
         <AgGridReact
-          rowHeight={100}
+          rowHeight={120}
           rowData={rowArray}
           columnDefs={columnDefs}
           animateRows={true}
