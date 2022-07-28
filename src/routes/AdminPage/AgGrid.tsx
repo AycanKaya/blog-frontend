@@ -14,7 +14,6 @@ import PhoneNumberCellEditör from "./PhoneNumberCellEditör";
 import CountryCellEditör from "./CountryCellEditör";
 import AddressCellEditör from "./AddressCellEditör";
 import ButtonEditör from "./ButtonEditör";
-import "./style/style.css";
 
 interface IRow {
   userID: string;
@@ -42,10 +41,27 @@ export default function GenerateRows() {
     getAllUserInfo();
   }, []);
 
+  const defaultColDef = {
+    flex: 1,
+    editable: false,
+    filter: false,
+    lockPinned: true,
+    suppressMovable: true,
+    suppressMenu: true,
+    //  headerClass: "text-center",
+    //   cellClass: "text-center",
+    cellStyle: {
+      fontSize: "14px",
+      height: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+  };
+
   const columnDefs = [
     {
       field: "userName",
-
       width: 150,
       cellRenderer: (params: any) => {
         return TextCellEditör(params.data);
@@ -60,7 +76,6 @@ export default function GenerateRows() {
     },
     {
       field: "surname",
-
       width: 150,
       cellRenderer: (params: any) => {
         return SurnameCellEditör(params.data);
@@ -69,7 +84,6 @@ export default function GenerateRows() {
     {
       field: "role",
       width: 125,
-
       cellRenderer: (params: any) => {
         return RoleCellEditör(params.data);
       },
@@ -131,6 +145,7 @@ export default function GenerateRows() {
           rowHeight={120}
           rowData={rowArray}
           columnDefs={columnDefs}
+          defaultColDef={defaultColDef}
           animateRows={true}
           rowSelection="multiple"
         ></AgGridReact>
