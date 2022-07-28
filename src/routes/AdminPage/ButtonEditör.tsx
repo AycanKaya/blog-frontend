@@ -2,7 +2,6 @@ import * as React from "react";
 import SaveIcon from "@mui/icons-material/Save";
 import { Button } from "@mui/material";
 import { put } from "../../api/axios";
-import "./style/button.css";
 
 export default function ButtonEditör(params: any) {
   function updateUser(userId: string, body: string) {
