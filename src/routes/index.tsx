@@ -5,6 +5,7 @@ import Login from "./Login";
 import { Register } from "./Register";
 import BlogPage from "./BlogPage";
 import AdminPage from "./AdminPage";
+import SettingsPage from "./AdminPage/SettingsPage.tsx";
 
 export default function Routes() {
   return (
@@ -15,6 +16,7 @@ export default function Routes() {
         <Route path="login" element={<Login />} />
         <Route path="blogPage" element={<BlogPage />} />
         <Route path="adminPage" element={<AdminPage />} />
+        <Route path="adminInfo" element={<SettingsPage />} />
       </Route>
     </BaseRoutes>
   );
