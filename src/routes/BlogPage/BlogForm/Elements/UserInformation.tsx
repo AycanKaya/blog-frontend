@@ -4,10 +4,14 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import AccountSettings from "./AccountSettings";
-import { get } from "../../../../api/axios";
-import React, { useEffect, useState } from "react";
 import ProfileSettings from "./ProfileSettings";
+import AccountSettings from "./AccountSettings";
+import { get, post } from "../../../../api/axios";
+import React, { useEffect, useState } from "react";
+import ProfileIcons from "./ProfileIcons";
+import { Button } from "@mui/material";
+import SaveButton from "./SaveButton";
+import EditButton from "./EditButton";
 
 interface IUser {
   userID: string;
@@ -15,7 +19,7 @@ interface IUser {
   name: string;
   surname: string;
   role: string;
-  gender: string;
+  gender: number;
   birthDay: Date;
   age: string;
   phoneNumber: string;
@@ -28,7 +32,7 @@ const defaultUser: IUser = {
   name: "",
   surname: "",
   role: "",
-  gender: "",
+  gender: 0,
   birthDay: new Date(""),
   age: "",
   phoneNumber: "",
@@ -38,13 +42,17 @@ const defaultUser: IUser = {
 
 const UserInformaiton: React.FC = () => {
   const [value, setValue] = useState("1");
+
+  const [edit, setEdit] = useState(true);
+
   const [userInfo, setUserInfo] = useState<IUser>(defaultUser);
 
-  async function getUserInfo() {
-    await get("/Account/GetUserInfo").then((response: IUser) => {
+  function getUserInfo() {
+    get("/Account/GetUserInfo").then((response: IUser) => {
       setUserInfo(response);
     });
   }
+
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -54,32 +62,47 @@ const UserInformaiton: React.FC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: "auto",
-        typography: "body1",
-        alignItems: "center",
-        paddingLeft: "500px",
-        paddingTop: "50px",
-      }}
-    >
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Item One" value="1" />
-            <Tab label="Item Two" value="2" />
-            <Tab label="Item Three" value="3" />
-          </TabList>
-        </Box>
-        <TabPanel value="1">
-          <AccountSettings userInfo={userInfo} />
-        </TabPanel>
-        <TabPanel value="2">
-          <ProfileSettings userInfo={userInfo} />
-        </TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
-      </TabContext>
-    </Box>
+    <>
+      <ProfileIcons userName={userInfo.userName + " " + userInfo.surname} />
+      <SaveButton userInfo={userInfo} edit={edit} setEdit={setEdit} />
+      <EditButton setEdit={setEdit} />
+      <Box
+        sx={{
+          width: "auto",
+          typography: "body1",
+          alignItems: "center",
+          paddingLeft: "600px",
+          paddingTop: "50px",
+          display: "inline-table",
+          verticalAlign: "baseline",
+        }}
+      >
+        <TabContext value={value}>
+          <Box
+            sx={{
+              borderBottom: 1,
+              borderColor: "divider",
+            }}
+          >
+            <TabList onChange={handleChange} aria-label="lab API tabs example">
+              <Tab label="User Information Settings" value="1" />
+              <Tab label="Account Settings" value="2" />
+            </TabList>
+          </Box>
+          <TabPanel value="1">
+            <ProfileSettings
+              userInfo={userInfo}
+              editable={edit}
+              setUserInfo={setUserInfo}
+            />
+          </TabPanel>
+
+          <TabPanel value="2">
+            <AccountSettings userInfo={userInfo} />
+          </TabPanel>
+        </TabContext>
+      </Box>
+    </>
   );
 };
 export default UserInformaiton;

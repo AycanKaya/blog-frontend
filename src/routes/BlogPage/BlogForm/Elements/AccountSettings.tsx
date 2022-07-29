@@ -11,7 +11,7 @@ interface IUser {
   name: string;
   surname: string;
   role: string;
-  gender: string;
+  gender: number;
   birthDay: Date;
   age: string;
   phoneNumber: string;
