@@ -21,7 +21,7 @@ export interface PostValues {
   content: string;
 }
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Logout", "Dashboard"];
+const settings = ["Settings", "Logout", "Dashboard"];
 
 const ResponsiveAppBar = () => {
   const theme = createTheme({
@@ -66,8 +66,8 @@ const ResponsiveAppBar = () => {
     if (setting === "Dashboard") {
       navigate("../adminPage");
     }
-    if (setting === "Profile") {
-      navigate("../login");
+    if (setting === "Settings") {
+      navigate("../adminInfo");
     }
   };
 

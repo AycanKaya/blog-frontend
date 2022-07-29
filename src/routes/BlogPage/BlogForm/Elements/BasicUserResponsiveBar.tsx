@@ -20,7 +20,7 @@ export interface PostValues {
   content: string;
 }
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Logout"];
+const settings = ["Settings", "Logout"];
 
 const ResponsiveAppBar = () => {
   const theme = createTheme({
@@ -62,8 +62,8 @@ const ResponsiveAppBar = () => {
       localStorage.removeItem("jwToken");
       navigate("../login");
     }
-    if (setting === "Profile") {
-      navigate("../login");
+    if (setting === "Settings") {
+      navigate("../blogPage");
     }
   };
 
