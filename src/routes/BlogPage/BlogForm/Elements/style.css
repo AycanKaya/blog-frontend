@@ -1,7 +1,16 @@
 .borderStyle {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 25px;
+  text-decoration-color: #203944;
+  print-color-adjust: #203944;
   background: #9ccbe0;
   padding: 10px;
-  width: 20ch;
+  margin: 15px;
+  width: 40ch;
   height: auto;
+}
+.social {
+  color: #203944;
+  display: contents;
+  font-size: 14px;
 }
