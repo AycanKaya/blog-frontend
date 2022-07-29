@@ -29,76 +29,50 @@ interface IUser {
 }
 interface UserProps {
   userInfo: IUser;
+  editable: boolean;
   setUserInfo: React.Dispatch<React.SetStateAction<IUser>>;
 }
 
-const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
-  const [editable, setEditable] = useState(true);
-
-  const [user, setUser] = useState<IUser>({
-    userID: userInfo.userID,
-    userName: userInfo.userName,
-    name: userInfo.name,
-    surname: userInfo.surname,
-    role: userInfo.role,
-    gender: userInfo.gender,
-    birthDay: userInfo.birthDay,
-    age: userInfo.age,
-    phoneNumber: userInfo.phoneNumber,
-    contry: userInfo.contry,
-    address: userInfo.address,
-  });
-
+const ProfileSettings: React.FC<UserProps> = ({
+  userInfo,
+  editable,
+  setUserInfo,
+}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, userName: event.target.value });
+    setUserInfo({ ...userInfo, userName: event.target.value });
   };
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, name: event.target.value });
+    setUserInfo({ ...userInfo, name: event.target.value });
   };
   const handleSurnameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, surname: event.target.value });
+    setUserInfo({ ...userInfo, surname: event.target.value });
   };
   const handleGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, gender: Number(event.target.value) });
+    setUserInfo({ ...userInfo, gender: Number(event.target.value) });
   };
   const handleBirthdayChange = (event: any) => {
-    setUser({ ...user, birthDay: event.target.value });
+    setUserInfo({ ...userInfo, birthDay: event.target.value });
   };
   const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, age: event.target.value });
+    setUserInfo({ ...userInfo, age: event.target.value });
   };
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, phoneNumber: event.target.value });
+    setUserInfo({ ...userInfo, phoneNumber: event.target.value });
   };
   const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, contry: event.target.value });
+    setUserInfo({ ...userInfo, contry: event.target.value });
   };
   const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, address: event.target.value });
+    setUserInfo({ ...userInfo, address: event.target.value });
   };
 
-  function handleEditableChange() {
-    setEditable(false);
-  }
-
   function setDefaultValue(date: string) {
-    var year = date.substr(0, 4);
-    var mounth = date.substr(5, 2);
-    var day = date.substr(8, 2);
+    var year = date.toString().substring(0, 4);
+    var mounth = date.toString().substring(5, 2);
+    var day = date.toString().substring(8, 2);
     return year + "-" + mounth + "-" + day;
   }
 
-  async function updateUser() {
-    await post("/Account/UserInfo", user).then((response: IUser) => {
-      console.log("Success", response);
-    });
-  }
-
-  async function updateUserInformation() {
-    await updateUser();
-    setUserInfo(user);
-    setEditable(true);
-  }
   const sx = {
     paddingInlineStart: "15px",
     margin: "5px",
@@ -108,13 +82,13 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
   return (
     <>
       <div className="borderStyle">
-        <p className="social">USERNAME : </p>
+        <p className="social">Username : </p>
         <TextField
           sx={sx}
           id="standard-required"
           InputProps={{ disableUnderline: true }}
           variant="standard"
-          value={user.userName}
+          value={userInfo.userName}
           disabled={editable}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleChange(event)
@@ -130,7 +104,7 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
           id="standard-required"
           variant="standard"
           InputProps={{ disableUnderline: true }}
-          value={user.name}
+          value={userInfo.name}
           disabled={editable}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleNameChange(event)
@@ -145,7 +119,7 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
           sx={sx}
           id="standard-required"
           variant="standard"
-          value={user.surname}
+          value={userInfo.surname}
           InputProps={{ disableUnderline: true }}
           disabled={editable}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -162,7 +136,7 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
             sx={{ display: "-webkit-box", verticalAlign: "baseline" }}
             aria-labelledby="demo-controlled-radio-buttons-group"
             name="controlled-radio-buttons-group"
-            value={user.gender}
+            value={userInfo.gender}
             onChange={(event: any) => handleGenderChange(event)}
           >
             <FormControlLabel
@@ -188,7 +162,7 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
           sx={{ width: 220, verticalAlign: "baseline" }}
           type="date"
           variant="standard"
-          defaultValue={setDefaultValue(user.birthDay as unknown as string)}
+          defaultValue={setDefaultValue(userInfo.birthDay as unknown as string)}
           disabled={editable}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -204,7 +178,7 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
           sx={sx}
           id="standard-required"
           variant="standard"
-          value={user.age}
+          value={userInfo.age}
           disabled={editable}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -217,10 +191,10 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
         {" "}
         Phone Number :
         <TextField
-          sx={sx}
+          sx={{ ...sx, width: "20px" }}
           id="standard-required"
           variant="standard"
-          value={user.phoneNumber}
+          value={userInfo.phoneNumber}
           disabled={editable}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -236,7 +210,7 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
           sx={sx}
           id="standard-required"
           variant="standard"
-          value={user.contry}
+          value={userInfo.contry}
           disabled={editable}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -252,7 +226,7 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
           sx={sx}
           id="standard-required"
           variant="standard"
-          value={user.address}
+          value={userInfo.address}
           disabled={editable}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -260,15 +234,6 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, setUserInfo }) => {
           }
         />
       </div>
-
-      <Button
-        variant="outlined"
-        disabled={false}
-        onClick={updateUserInformation}
-      >
-        SAVE
-      </Button>
-      <Button onClick={handleEditableChange}>UPDATE</Button>
     </>
   );
 };
