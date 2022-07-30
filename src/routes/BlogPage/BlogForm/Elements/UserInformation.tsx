@@ -18,6 +18,7 @@ interface IUser {
   userName: string;
   name: string;
   surname: string;
+  email: string;
   role: string;
   gender: number;
   birthDay: Date;
@@ -31,6 +32,7 @@ const defaultUser: IUser = {
   userName: "",
   name: "",
   surname: "",
+  email: "",
   role: "",
   gender: 0,
   birthDay: new Date(""),
