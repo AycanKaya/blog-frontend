@@ -39,20 +39,37 @@ const requestBody: IRequestPassword = {
 const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
   const [edit, setEdit] = useState(true);
   const [body, setBody] = useState(requestBody);
-  const [name, setName] = useState(userInfo.userName);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
+  useEffect(() => {
+    setBody({ ...body, email: userInfo.email });
+  }, []);
+
+  const handleOldPasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setBody({ ...body, oldPassword: event.target.value });
+  };
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBody({ ...body, password: event.target.value });
+  };
+  const handleConfirmPasswodChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setBody({ ...body, confirmPassword: event.target.value });
   };
 
   function handleEditableChange() {
     setEdit(false);
   }
 
-  function updatePassword() {}
+  function updatePassword() {
+    post("/Account/reset-password", body).then((response: any) => {
+      console.log(response);
+    });
+  }
 
   const sx = {
-    padding: "10px",
+    padding: "5px",
     paddingInlineStart: "10px",
     borderRadius: "10px",
     width: 200,
@@ -61,68 +78,55 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
   };
   return (
     <>
-      <div className="textDiv">
-        <p className="social">Email : </p>
-        <TextField
-          sx={sx}
-          id="standard-required"
-          variant="standard"
-          size="medium"
-          value={userInfo.email}
-          InputProps={{ disableUnderline: true }}
-          disabled={edit}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            handleChange(event)
-          }
-        />
-      </div>
-      <div className="textDiv">
+      <div className="divForPassword">
         <p className="social">Old Password : </p>
         <TextField
           sx={sx}
           variant="standard"
           size="medium"
-          value={userInfo.userName}
+          value={body.oldPassword}
           InputProps={{ disableUnderline: true }}
           disabled={edit}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            handleChange(event)
+            handleOldPasswordChange(event)
           }
         />
       </div>
-      <div className="textDiv">
+      <div className="divForPassword">
         <p className="social">Password : </p>
         <TextField
           sx={sx}
           id="standard-required"
           variant="standard"
           InputProps={{ disableUnderline: true }}
-          value={userInfo.name}
+          value={body.password}
           disabled={edit}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            handleChange(event)
+            handlePasswordChange(event)
           }
         />
       </div>
 
-      <div className="textDiv">
+      <div className="divForPassword">
         <p className="social">Confirm Password : </p>
         <TextField
           sx={sx}
           id="standard-required"
           variant="standard"
           size="medium"
-          value={userInfo.surname}
+          value={body.confirmPassword}
           InputProps={{ disableUnderline: true }}
           disabled={edit}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            handleChange(event)
+            handleConfirmPasswodChange(event)
           }
         />
       </div>
       <Button
         sx={{
-          position: "absolute",
+          position: "initial",
+          display: "inline-table",
+          margin: "40px",
         }}
         size="large"
         variant="contained"
@@ -134,7 +138,9 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
       </Button>
       <Button
         sx={{
-          position: "absolute",
+          position: "initial",
+          display: "inline-table",
+          margin: "40px",
         }}
         variant="contained"
         size="large"
