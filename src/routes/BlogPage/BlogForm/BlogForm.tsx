@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import ResponsiveAppBar from "./Elements/BasicUserResponsiveBar";
+import Settings from "./Elements/Settings";
 import UserInformation from "./Elements/UserInformation";
 const BlogForm = () => {
   return (

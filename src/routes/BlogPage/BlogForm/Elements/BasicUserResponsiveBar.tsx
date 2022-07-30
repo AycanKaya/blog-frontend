@@ -26,7 +26,7 @@ const ResponsiveAppBar = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#3B719F",
+        main: "#8F8CE7",
       },
       secondary: {
         light: "#ff7961",
@@ -93,14 +93,14 @@ const ResponsiveAppBar = () => {
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
+                fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
                 fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
+                letterSpacing: ".2rem",
+                color: "#D8DCD6",
                 textDecoration: "none",
               }}
             >
-              LOGO
+              BLOG
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

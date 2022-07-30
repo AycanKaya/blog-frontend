@@ -1,16 +1,28 @@
 .borderStyle {
+  display: inline-table;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border-radius: 25px;
+  border-radius: 17px;
   text-decoration-color: #203944;
   print-color-adjust: #203944;
-  background: #9ccbe0;
-  padding: 10px;
-  margin: 15px;
-  width: 40ch;
+  padding: 7px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  width: 34ch;
   height: auto;
 }
 .social {
-  color: #203944;
-  display: contents;
+  color: #3b719f;
+  width: auto;
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px;
+  margin-bottom: 0px;
+}
+.textDiv {
+  display: inline-table;
+  margin-left: 10px;
+  width: auto;
+}
+.avatar {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
