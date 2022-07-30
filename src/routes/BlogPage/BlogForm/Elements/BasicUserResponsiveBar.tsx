@@ -26,7 +26,7 @@ const ResponsiveAppBar = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#607d8c;",
+        main: "#3B719F",
       },
       secondary: {
         light: "#ff7961",
@@ -75,9 +75,13 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
+  const sx = {
+    borderRadius: "10px",
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="primary" sx={sx}>
         <Container maxWidth="xl" color="AppBar">
           <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
