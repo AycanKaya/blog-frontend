@@ -1,24 +1,25 @@
 import {
   Button,
   FormControl,
-  makeStyles,
+  Grid,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
 import "./style.css";
-import { post } from "../../../../api/axios";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
+import { width } from "@mui/system";
 
 interface IUser {
   userID: string;
   userName: string;
   name: string;
   surname: string;
+  email: string;
   role: string;
   gender: number;
   birthDay: Date;
@@ -65,6 +66,9 @@ const ProfileSettings: React.FC<UserProps> = ({
   const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, address: event.target.value });
   };
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, email: event.target.value });
+  };
 
   function setDefaultValue(date: string) {
     var year = date.toString().substring(0, 4);
@@ -74,31 +78,32 @@ const ProfileSettings: React.FC<UserProps> = ({
   }
 
   const sx = {
-    paddingInlineStart: "15px",
-    margin: "5px",
-    verticalAlign: "baseline",
+    padding: "10px",
+    paddingInlineStart: "10px",
+    borderRadius: "10px",
+    width: 200,
+    boxShadow: "#3B719F 0px 5px 15px",
+    display: "inline-table",
   };
 
   return (
     <>
-      <div className="borderStyle">
+      <div className="textDiv">
         <p className="social">Username : </p>
         <TextField
           sx={sx}
-          id="standard-required"
-          InputProps={{ disableUnderline: true }}
           variant="standard"
+          size="medium"
           value={userInfo.userName}
+          InputProps={{ disableUnderline: true }}
           disabled={editable}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleChange(event)
           }
         />
       </div>
-
-      <div className="borderStyle">
-        {" "}
-        Name :
+      <div className="textDiv">
+        <p className="social">Name : </p>
         <TextField
           sx={sx}
           id="standard-required"
@@ -112,13 +117,13 @@ const ProfileSettings: React.FC<UserProps> = ({
         />
       </div>
 
-      <div className="borderStyle">
-        {" "}
-        Surname :
+      <div className="textDiv">
+        <p className="social">Surname : </p>
         <TextField
           sx={sx}
           id="standard-required"
           variant="standard"
+          size="medium"
           value={userInfo.surname}
           InputProps={{ disableUnderline: true }}
           disabled={editable}
@@ -127,13 +132,26 @@ const ProfileSettings: React.FC<UserProps> = ({
           }
         />
       </div>
-
-      <div className="borderStyle">
-        <p className="social">GENDER : </p>
+      <div className="textDiv">
+        <p className="social">Email : </p>
+        <TextField
+          sx={sx}
+          variant="standard"
+          size="medium"
+          value={userInfo.email}
+          InputProps={{ disableUnderline: true }}
+          disabled={editable}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            handleEmailChange(event)
+          }
+        />
+      </div>
+      <div className="textDiv">
+        <p className="social">Gender : </p>
 
         <FormControl>
           <RadioGroup
-            sx={{ display: "-webkit-box", verticalAlign: "baseline" }}
+            sx={sx}
             aria-labelledby="demo-controlled-radio-buttons-group"
             name="controlled-radio-buttons-group"
             value={userInfo.gender}
@@ -155,12 +173,12 @@ const ProfileSettings: React.FC<UserProps> = ({
         </FormControl>
       </div>
 
-      <div className="borderStyle">
-        {" "}
-        Birthday :
+      <div className="textDiv">
+        <p className="social">Birthday : </p>
         <TextField
-          sx={{ width: 220, verticalAlign: "baseline" }}
+          sx={sx}
           type="date"
+          size="medium"
           variant="standard"
           defaultValue={setDefaultValue(userInfo.birthDay as unknown as string)}
           disabled={editable}
@@ -168,16 +186,16 @@ const ProfileSettings: React.FC<UserProps> = ({
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleBirthdayChange(event)
           }
-        />
+        />{" "}
       </div>
 
-      <div className="borderStyle">
-        {" "}
-        Age :
+      <div className="textDiv">
+        <p className="social">Age : </p>
         <TextField
           sx={sx}
           id="standard-required"
           variant="standard"
+          size="medium"
           value={userInfo.age}
           disabled={editable}
           InputProps={{ disableUnderline: true }}
@@ -187,13 +205,13 @@ const ProfileSettings: React.FC<UserProps> = ({
         />
       </div>
 
-      <div className="borderStyle">
-        {" "}
-        Phone Number :
+      <div className="textDiv">
+        <p className="social">Phone Number : </p>
         <TextField
-          sx={{ ...sx, width: "20px" }}
+          sx={sx}
           id="standard-required"
           variant="standard"
+          size="medium"
           value={userInfo.phoneNumber}
           disabled={editable}
           InputProps={{ disableUnderline: true }}
@@ -203,9 +221,8 @@ const ProfileSettings: React.FC<UserProps> = ({
         />
       </div>
 
-      <div className="borderStyle">
-        {" "}
-        Country :
+      <div className="textDiv">
+        <p className="social">Country : </p>
         <TextField
           sx={sx}
           id="standard-required"
@@ -219,9 +236,8 @@ const ProfileSettings: React.FC<UserProps> = ({
         />
       </div>
 
-      <div className="borderStyle">
-        {" "}
-        Address :
+      <div className="textDiv">
+        <p className="social">Adress : </p>
         <TextField
           sx={sx}
           id="standard-required"
