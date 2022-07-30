@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import EmojiNatureIcon from "@mui/icons-material/EmojiNature";
 
 export interface PostValues {
   title: string;
@@ -84,7 +85,17 @@ const ResponsiveAppBar = () => {
       <AppBar position="static" color="primary" sx={sx}>
         <Container maxWidth="xl" color="AppBar">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <EmojiNatureIcon
+              sx={{
+                display: {
+                  xs: "none",
+                  md: "flex",
+                  fontSize: "40px",
+                  color: "#FDC1C5",
+                },
+                mr: 1,
+              }}
+            />
             <Typography
               variant="h6"
               noWrap
