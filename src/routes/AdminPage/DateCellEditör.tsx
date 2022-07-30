@@ -19,7 +19,9 @@ export default function DateCellEditör(params: any) {
         id="date"
         type="date"
         defaultValue={setDefaultValue(params.birthDay)}
-        sx={{ width: 220 }}
+        sx={{ width: 110 }}
+        variant="standard"
+        InputProps={{ disableUnderline: true }}
         InputLabelProps={{
           shrink: true,
         }}

@@ -8,23 +8,12 @@ export default function NameCellEditör(params: any) {
   }
 
   return (
-    <Box
-      component="form"
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: "15ch" },
-      }}
-      noValidate
-      autoComplete="on"
-    >
-      <div>
-        <TextField
-          required
-          id="outlined-required"
-          defaultValue={params.name}
-          //  value={event?.target.value}
-          onChange={(event) => handleChange(event)}
-        />
-      </div>
-    </Box>
+    <TextField
+      variant="standard"
+      InputProps={{ disableUnderline: true }}
+      defaultValue={params.name}
+      //  value={event?.target.value}
+      onChange={(event) => handleChange(event)}
+    />
   );
 }

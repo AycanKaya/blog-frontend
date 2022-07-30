@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
+import EmojiNatureIcon from "@mui/icons-material/EmojiNature";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -27,7 +28,7 @@ const ResponsiveAppBar = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#607d8c;",
+        main: "#8F8CE7",
       },
       secondary: {
         light: "#ff7961",
@@ -79,12 +80,26 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
+  const sx = {
+    borderRadius: "10px",
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="primary" sx={sx}>
         <Container maxWidth="xl" color="AppBar">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <EmojiNatureIcon
+              sx={{
+                display: {
+                  xs: "none",
+                  md: "flex",
+                  fontSize: "40px",
+                  color: "#FDC1C5",
+                },
+                mr: 1,
+              }}
+            />
             <Typography
               variant="h6"
               noWrap
@@ -93,14 +108,14 @@ const ResponsiveAppBar = () => {
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
+                fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
                 fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
+                letterSpacing: ".1rem",
+                color: "#FFFFFF",
                 textDecoration: "none",
               }}
             >
-              LOGO
+              BLOG
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

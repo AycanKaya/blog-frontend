@@ -21,7 +21,8 @@ export default function AddressCellEditör(params: any) {
     >
       <div>
         <TextField
-          id="outlined-multiline-static"
+          variant="standard"
+          InputProps={{ disableUnderline: true }}
           multiline
           rows={3}
           defaultValue={params.address}

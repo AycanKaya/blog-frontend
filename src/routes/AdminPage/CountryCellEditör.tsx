@@ -41,7 +41,7 @@ export default function CountryCellEditör(paramsToGrid: any) {
           label={paramsToGrid.contry}
           inputProps={{
             ...params.inputProps,
-            autoComplete: "new-password", // disable autocomplete and autofill
+            autoComplete: "new-password",
           }}
         />
       )}

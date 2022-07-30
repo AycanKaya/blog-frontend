@@ -18,8 +18,9 @@ export default function TextCellEditör(params: any) {
     >
       <div>
         <TextField
-          required
-          id="outlined-required"
+          sx={{ paddingLeft: "10px" }}
+          variant="standard"
+          InputProps={{ disableUnderline: true }}
           defaultValue={params.userName}
           //  value={event?.target.value}
           onChange={(event) => handleChange(event)}

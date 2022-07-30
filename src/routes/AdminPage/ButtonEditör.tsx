@@ -1,9 +1,17 @@
 import * as React from "react";
 import SaveIcon from "@mui/icons-material/Save";
-import { Button } from "@mui/material";
+import { Button, createTheme, ThemeProvider } from "@mui/material";
 import { put } from "../../api/axios";
 
 export default function ButtonEditör(params: any) {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#3B719F",
+      },
+    },
+  });
+
   function updateUser(userId: string, body: string) {
     const url = "/Admin/Dashboard?id=" + userId;
     put(url, body).then((respone: any) => {
@@ -20,14 +28,19 @@ export default function ButtonEditör(params: any) {
   }
 
   return (
-    <Button
-      className="Button"
-      color="secondary"
-      onClick={(event: any) => handleUpdate(params.data)}
-      startIcon={<SaveIcon />}
-      variant="contained"
-    >
-      Save
-    </Button>
+    <>
+      <ThemeProvider theme={theme}>
+        <Button
+          className="Button"
+          size="medium"
+          color="primary"
+          onClick={(event: any) => handleUpdate(params.data)}
+          endIcon={<SaveIcon />}
+          variant="contained"
+        >
+          Save
+        </Button>
+      </ThemeProvider>
+    </>
   );
 }

@@ -21,7 +21,8 @@ export default function SurnameCellEditör(params: any) {
           required
           id="outlined-required"
           defaultValue={params.surname}
-          //  value={event?.target.value}
+          variant="standard"
+          InputProps={{ disableUnderline: true }}
           onChange={(event) => handleChange(event)}
         />
       </div>

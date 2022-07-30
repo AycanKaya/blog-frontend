@@ -20,6 +20,8 @@ export default function PhoneNumberCellEditör(params: any) {
         <TextField
           required
           id="outlined-required"
+          variant="standard"
+          InputProps={{ disableUnderline: true }}
           defaultValue={params.phoneNumber}
           //  value={event?.target.value}
           onChange={(event) => handleChange(event)}

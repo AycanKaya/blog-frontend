@@ -14,6 +14,7 @@ import PhoneNumberCellEditör from "./PhoneNumberCellEditör";
 import CountryCellEditör from "./CountryCellEditör";
 import AddressCellEditör from "./AddressCellEditör";
 import ButtonEditör from "./ButtonEditör";
+import "./style.css";
 
 interface IRow {
   userID: string;
@@ -42,7 +43,7 @@ export default function GenerateRows() {
   }, []);
 
   const defaultColDef = {
-    flex: 1,
+    flex: 2,
     editable: false,
     filter: false,
     lockPinned: true,
@@ -97,7 +98,7 @@ export default function GenerateRows() {
     },
     {
       field: "birthDay",
-      width: 240,
+      width: 500,
       cellRenderer: (params: any) => {
         return DateCellEditör(params.data);
       },
@@ -140,7 +141,13 @@ export default function GenerateRows() {
 
   return (
     <>
-      <div className="ag-theme-alpine" style={{ height: 600, width: "100%" }}>
+      <div
+        className="ag-theme-alpine"
+        style={{
+          height: 600,
+          width: "100%",
+        }}
+      >
         <AgGridReact
           rowHeight={120}
           rowData={rowArray}

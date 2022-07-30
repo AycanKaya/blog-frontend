@@ -18,9 +18,8 @@ export default function AgeCellEditör(params: any) {
     >
       <div>
         <TextField
-          required
-          id="outlined-required"
-          label=""
+          variant="standard"
+          InputProps={{ disableUnderline: true }}
           defaultValue={params.age}
           //  value={event?.target.value}
           onChange={(event) => handleChange(event)}
