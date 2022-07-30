@@ -84,6 +84,7 @@ const UserInformaiton: React.FC = () => {
             sx={{
               borderBottom: 1,
               borderColor: "divider",
+              width: "500px",
             }}
           >
             <TabList onChange={handleChange} aria-label="lab API tabs example">

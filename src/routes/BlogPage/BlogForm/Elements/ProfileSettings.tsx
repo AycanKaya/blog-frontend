@@ -78,7 +78,7 @@ const ProfileSettings: React.FC<UserProps> = ({
   }
 
   const sx = {
-    padding: "10px",
+    padding: "5px",
     paddingInlineStart: "10px",
     borderRadius: "10px",
     width: 200,
