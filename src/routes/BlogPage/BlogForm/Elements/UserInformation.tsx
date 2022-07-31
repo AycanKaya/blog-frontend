@@ -12,6 +12,7 @@ import ProfileIcons from "./ProfileIcons";
 import { Button } from "@mui/material";
 import SaveButton from "./SaveButton";
 import EditButton from "./EditButton";
+import "./style.css";
 
 interface IUser {
   userID: string;
@@ -66,15 +67,14 @@ const UserInformaiton: React.FC = () => {
   return (
     <>
       <ProfileIcons userName={userInfo.userName + " " + userInfo.surname} />
-      <SaveButton userInfo={userInfo} edit={edit} setEdit={setEdit} />
-      <EditButton setEdit={setEdit} />
+      <p className="email">{userInfo.email} </p>
       <Box
         sx={{
           width: "auto",
           typography: "body1",
           alignItems: "center",
           paddingLeft: "600px",
-          paddingTop: "50px",
+          paddingTop: "25px",
           display: "inline-table",
           verticalAlign: "baseline",
         }}
@@ -84,7 +84,7 @@ const UserInformaiton: React.FC = () => {
             sx={{
               borderBottom: 1,
               borderColor: "divider",
-              width: "500px",
+              width: "600px",
             }}
           >
             <TabList onChange={handleChange} aria-label="lab API tabs example">

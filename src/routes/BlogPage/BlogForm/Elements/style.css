@@ -11,12 +11,22 @@
   height: auto;
 }
 .social {
-  color: #3b719f;
+  color: #265177;
   width: auto;
 
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px;
   margin-bottom: 0px;
+}
+.email {
+  color: #3b719f;
+  width: auto;
+  position: absolute;
+  display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  margin-top: 360px;
+  margin-left: 150px;
 }
 .textDiv {
   display: inline-table;

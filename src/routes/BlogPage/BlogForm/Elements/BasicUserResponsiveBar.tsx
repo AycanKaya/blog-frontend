@@ -27,7 +27,7 @@ const ResponsiveAppBar = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#8F8CE7",
+        main: "#3B719F",
       },
       secondary: {
         light: "#ff7961",
@@ -91,7 +91,7 @@ const ResponsiveAppBar = () => {
                   xs: "none",
                   md: "flex",
                   fontSize: "40px",
-                  color: "#FDC1C5",
+                  color: "#D8DCD6",
                 },
                 mr: 1,
               }}

@@ -13,6 +13,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import { width } from "@mui/system";
+import SaveButton from "./SaveButton";
+import EditButton from "./EditButton";
 
 interface IUser {
   userID: string;
@@ -39,6 +41,8 @@ const ProfileSettings: React.FC<UserProps> = ({
   editable,
   setUserInfo,
 }) => {
+  const [edit, setEdit] = useState(true);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, userName: event.target.value });
   };
@@ -78,11 +82,11 @@ const ProfileSettings: React.FC<UserProps> = ({
   }
 
   const sx = {
-    padding: "5px",
+    padding: "3px",
     paddingInlineStart: "10px",
     borderRadius: "10px",
     width: 200,
-    boxShadow: "#3B719F 0px 5px 15px",
+    boxShadow: "#3B719F 0px 3px 8px",
     display: "inline-table",
   };
 
@@ -96,7 +100,7 @@ const ProfileSettings: React.FC<UserProps> = ({
           size="medium"
           value={userInfo.userName}
           InputProps={{ disableUnderline: true }}
-          disabled={editable}
+          disabled={edit}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleChange(event)
           }
@@ -110,7 +114,7 @@ const ProfileSettings: React.FC<UserProps> = ({
           variant="standard"
           InputProps={{ disableUnderline: true }}
           value={userInfo.name}
-          disabled={editable}
+          disabled={edit}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleNameChange(event)
           }
@@ -126,7 +130,7 @@ const ProfileSettings: React.FC<UserProps> = ({
           size="medium"
           value={userInfo.surname}
           InputProps={{ disableUnderline: true }}
-          disabled={editable}
+          disabled={edit}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleSurnameChange(event)
           }
@@ -140,7 +144,7 @@ const ProfileSettings: React.FC<UserProps> = ({
           size="medium"
           value={userInfo.email}
           InputProps={{ disableUnderline: true }}
-          disabled={editable}
+          disabled={edit}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleEmailChange(event)
           }
@@ -158,13 +162,13 @@ const ProfileSettings: React.FC<UserProps> = ({
             onChange={(event: any) => handleGenderChange(event)}
           >
             <FormControlLabel
-              disabled={editable}
+              disabled={edit}
               value={0}
               control={<Radio />}
               label="Kadın"
             />
             <FormControlLabel
-              disabled={editable}
+              disabled={edit}
               value={1}
               control={<Radio />}
               label="Erkek"
@@ -181,7 +185,7 @@ const ProfileSettings: React.FC<UserProps> = ({
           size="medium"
           variant="standard"
           defaultValue={setDefaultValue(userInfo.birthDay as unknown as string)}
-          disabled={editable}
+          disabled={edit}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleBirthdayChange(event)
@@ -197,7 +201,7 @@ const ProfileSettings: React.FC<UserProps> = ({
           variant="standard"
           size="medium"
           value={userInfo.age}
-          disabled={editable}
+          disabled={edit}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleAgeChange(event)
@@ -213,7 +217,7 @@ const ProfileSettings: React.FC<UserProps> = ({
           variant="standard"
           size="medium"
           value={userInfo.phoneNumber}
-          disabled={editable}
+          disabled={edit}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handlePhoneChange(event)
@@ -228,7 +232,7 @@ const ProfileSettings: React.FC<UserProps> = ({
           id="standard-required"
           variant="standard"
           value={userInfo.contry}
-          disabled={editable}
+          disabled={edit}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleCountryChange(event)
@@ -243,13 +247,15 @@ const ProfileSettings: React.FC<UserProps> = ({
           id="standard-required"
           variant="standard"
           value={userInfo.address}
-          disabled={editable}
+          disabled={edit}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleAddressChange(event)
           }
         />
       </div>
+      <SaveButton userInfo={userInfo} edit={edit} setEdit={setEdit} />
+      <EditButton setEdit={setEdit} />
     </>
   );
 };
