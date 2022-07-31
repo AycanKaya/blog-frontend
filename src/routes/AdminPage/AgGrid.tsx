@@ -43,17 +43,16 @@ export default function GenerateRows() {
   }, []);
 
   const defaultColDef = {
-    flex: 2,
     editable: false,
     filter: false,
     lockPinned: true,
     suppressMovable: true,
     suppressMenu: true,
-    //  headerClass: "text-center",
-    //   cellClass: "text-center",
+    headerClass: "text-center",
+    cellClass: "text-center",
     cellStyle: {
-      fontSize: "14px",
-      height: "100%",
+      fontSize: "12px",
+      height: "100px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -63,42 +62,42 @@ export default function GenerateRows() {
   const columnDefs = [
     {
       field: "userName",
-      width: 150,
+      width: 110,
       cellRenderer: (params: any) => {
         return TextCellEditör(params.data);
       },
     },
     {
       field: "name",
-      width: 150,
+      width: 100,
       cellRenderer: (params: any) => {
         return NameCellEditör(params.data);
       },
     },
     {
       field: "surname",
-      width: 150,
+      width: 107,
       cellRenderer: (params: any) => {
         return SurnameCellEditör(params.data);
       },
     },
     {
       field: "role",
-      width: 125,
+      width: 100,
       cellRenderer: (params: any) => {
         return RoleCellEditör(params.data);
       },
     },
     {
       field: "gender",
-      width: 140,
+      width: 100,
       cellRenderer: (params: any) => {
         return GenderSelectEditör(params.data);
       },
     },
     {
       field: "birthDay",
-      width: 500,
+      width: 140,
       cellRenderer: (params: any) => {
         return DateCellEditör(params.data);
       },
@@ -112,27 +111,27 @@ export default function GenerateRows() {
     },
     {
       field: "phoneNumber",
-      width: 150,
+      width: 120,
       cellRenderer: (params: any) => {
         return PhoneNumberCellEditör(params.data);
       },
     },
     {
       field: "contry",
-      width: 210,
+      width: 150,
       cellRenderer: (params: any) => {
         return CountryCellEditör(params.data);
       },
     },
     {
       field: "address",
-      width: 200,
+      width: 170,
       cellRenderer: (params: any) => {
         return AddressCellEditör(params.data);
       },
     },
     {
-      field: "button",
+      width: 130,
       cellRenderer: (params: any) => {
         return ButtonEditör(params);
       },
@@ -149,7 +148,7 @@ export default function GenerateRows() {
         }}
       >
         <AgGridReact
-          rowHeight={120}
+          rowHeight={80}
           rowData={rowArray}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}

@@ -14,11 +14,13 @@ export default function GenderSelectEditör(params: any) {
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 100 }}>
       <FormControl fullWidth>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
+          variant="standard"
+          inputProps={{ disableUnderline: true }}
           value={gender}
           onChange={handleChange}
         >

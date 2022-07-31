@@ -14,7 +14,7 @@ export default function CountryCellEditör(paramsToGrid: any) {
   return (
     <Autocomplete
       id="country-select-demo"
-      sx={{ width: 190 }}
+      sx={{ width: "120px" }}
       options={countries}
       onChange={(SelectChangeEvent) => handleChange(SelectChangeEvent)}
       autoHighlight
@@ -22,7 +22,7 @@ export default function CountryCellEditör(paramsToGrid: any) {
       renderOption={(props, option) => (
         <Box
           component="li"
-          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+          sx={{ "& > img": { mr: 1, flexShrink: 0 } }}
           {...props}
         >
           <img
@@ -39,9 +39,11 @@ export default function CountryCellEditör(paramsToGrid: any) {
         <TextField
           {...params}
           label={paramsToGrid.contry}
+          variant="standard"
           inputProps={{
             ...params.inputProps,
             autoComplete: "new-password",
+            disableUnderline: true,
           }}
         />
       )}

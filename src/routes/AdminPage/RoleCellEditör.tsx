@@ -18,6 +18,8 @@ export default function RoleCellEditör(params: any) {
           <Select
             size="small"
             labelId="demo-simple-select-label"
+            variant="standard"
+            inputProps={{ disableUnderline: true }}
             id={params.userID}
             value={role}
             onChange={(event) => handleChange(event, params)}
