@@ -33,11 +33,11 @@ export default function HomeResponsiveBar() {
   const theme = createTheme({
     palette: {
       neutral: {
-        main: "#0a0c0a",
-        contrastText: "#fff",
+        main: "#D8DCD6",
+        contrastText: "#D8DCD6",
       },
       primary: {
-        main: "#8F8CE7",
+        main: "#3B719F",
         contrastText: "#fafdff",
       },
     },
@@ -66,7 +66,7 @@ export default function HomeResponsiveBar() {
                       xs: "none",
                       md: "flex",
                       fontSize: "40px",
-                      color: "#FDC1C5",
+                      color: "#D8DCD6",
                     },
                     mr: 1,
                   }}
