@@ -14,6 +14,8 @@ export default function Login() {
     const role = await get("/Account/GetCurrentUserRole");
     if (role === "Admin") {
       navigate("../adminInfo");
+    } else if (role == "Editor") {
+      navigate("../editorInfo");
     } else navigate("../blogPage");
   }
   return <LoginForm onSubmit={handleSubmit} />;
