@@ -75,9 +75,11 @@ const ProfileSettings: React.FC<UserProps> = ({
   };
 
   function setDefaultValue(date: string) {
-    var year = date.toString().substring(0, 4);
-    var mounth = date.toString().substring(5, 2);
-    var day = date.toString().substring(8, 2);
+    console.log(date);
+    var year = date.substr(0, 4);
+    var mounth = date.substr(5, 2);
+    var day = date.substr(8, 2);
+    console.log(year, " ", mounth, " ", day);
     return year + "-" + mounth + "-" + day;
   }
 
@@ -184,7 +186,7 @@ const ProfileSettings: React.FC<UserProps> = ({
           type="date"
           size="medium"
           variant="standard"
-          defaultValue={setDefaultValue(userInfo.birthDay as unknown as string)}
+          defaultValue={setDefaultValue(userInfo.birthDay.toString())}
           disabled={edit}
           InputProps={{ disableUnderline: true }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
