@@ -16,6 +16,8 @@ import { post } from "../../../../api/axios";
 import SendIcon from "@mui/icons-material/Send";
 import { ThemeProvider } from "@emotion/react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import Alert from "@mui/material/Alert";
+import ResponseMessages from "./ResponseMessages";
 
 interface IUser {
   userID: string;
@@ -60,6 +62,17 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
   const [body, setBody] = useState(requestBody);
   const [showPassword, setShowPassword] = useState(false);
 
+  interface show {
+    oldPassword: boolean;
+    password: boolean;
+    confirmPassword: boolean;
+  }
+  const [show, setShow] = useState({
+    oldPassword: false,
+    password: false,
+    confirmPassword: false,
+  });
+
   useEffect(() => {
     setBody({ ...body, email: userInfo.email });
   }, []);
@@ -84,13 +97,34 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
 
   function updatePassword() {
     post("/Account/reset-password", body).then((response: any) => {
-      console.log(response);
+      if (response.succeeded == true) {
+        setBody({
+          ...body,
+          oldPassword: "",
+          password: "",
+          confirmPassword: "",
+        });
+        setEdit(true);
+      }
     });
-    setEdit(true);
   }
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
+  const handleClickShowOld = () => {
+    setShow({ ...show, oldPassword: !show.oldPassword });
   };
+  const handleClickShowPassword = () => {
+    setShow({ ...show, password: !show.password });
+  };
+  const handleClickShowConfirm = () => {
+    setShow({ ...show, confirmPassword: !show.confirmPassword });
+  };
+
+  /*
+  const handleClickShowPassword =
+    (prop: keyof show) =>
+    (event: React.MouseEventHandler<HTMLAnchorElement>) => {
+      setShow({ ...show, [prop]: true });
+    }; 
+    */
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -117,8 +151,8 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
             </InputLabel>
             <OutlinedInput
               sx={sx}
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
+              id="outlined-adornment-Oldpassword"
+              type={show.oldPassword ? "text" : "password"}
               disabled={edit}
               inputProps={{ disableUnderline: true }}
               value={body.oldPassword}
@@ -129,12 +163,13 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
+                    onClick={handleClickShowOld}
+                    disabled={edit}
                     sx={{ paddingLeft: "6px" }}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                    {show.oldPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
@@ -156,7 +191,7 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
             <OutlinedInput
               sx={sx}
               id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
+              type={show.password ? "text" : "password"}
               disabled={edit}
               inputProps={{ disableUnderline: true }}
               value={body.password}
@@ -168,11 +203,12 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
+                    disabled={edit}
                     sx={{ paddingLeft: "6px" }}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                    {show.password ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
@@ -189,12 +225,12 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
               htmlFor="outlined-adornment-password"
               sx={{ position: "center" }}
             >
-              Confirm Password :
+              Confirm Password
             </InputLabel>
             <OutlinedInput
               sx={sx}
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
+              id="outlined-adornment-Confirmpassword"
+              type={show.confirmPassword ? "text" : "password"}
               disabled={edit}
               inputProps={{ disableUnderline: true }}
               value={body.confirmPassword}
@@ -205,12 +241,13 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
+                    onClick={handleClickShowConfirm}
+                    disabled={edit}
                     sx={{ paddingLeft: "6px" }}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                    {show.confirmPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
@@ -257,3 +294,8 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
   );
 };
 export default AccountSettings;
+function oldPassword(
+  oldPassword: any
+): React.MouseEventHandler<HTMLAnchorElement> | undefined {
+  throw new Error("Function not implemented.");
+}
