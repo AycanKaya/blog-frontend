@@ -51,8 +51,8 @@ const UserInformaiton: React.FC = () => {
   const [userInfo, setUserInfo] = useState<IUser>(defaultUser);
 
   function getUserInfo() {
-    get("/Account/GetUserInfo").then((response: IUser) => {
-      setUserInfo(response);
+    get("/Account/GetUserInfo").then((response: any) => {
+      setUserInfo(response.userInfo);
     });
   }
 
