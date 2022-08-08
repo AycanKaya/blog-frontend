@@ -118,14 +118,6 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
     setShow({ ...show, confirmPassword: !show.confirmPassword });
   };
 
-  /*
-  const handleClickShowPassword =
-    (prop: keyof show) =>
-    (event: React.MouseEventHandler<HTMLAnchorElement>) => {
-      setShow({ ...show, [prop]: true });
-    }; 
-    */
-
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
