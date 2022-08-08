@@ -3,13 +3,23 @@ import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Box, createTheme, Fab, ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+import AgGridReact from "./SettingPosts";
+import SettingPosts from "./SettingPosts";
 
 const SetApprove = (params: any) => {
   async function ActivateRequest(body: any) {
-    console.log("BODY => ", body);
     await post("/EditorUser/ActivateControl", body).then((response) => {
+      updatePage();
       return response;
     });
+  }
+
+  function updatePage() {
+    const root = ReactDOM.render(
+      <AgGridReact />,
+      document.getElementById("root")
+    );
   }
 
   function handleConfirmClick() {
