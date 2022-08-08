@@ -9,12 +9,13 @@ export default function Login() {
   let navigate = useNavigate();
 
   async function handleSubmit(values: LoginValues) {
-    const user = await post("/Account/authenticate", values);
-    localStorage.setItem("jwToken", user.jwToken);
-    const role = await get("/Account/GetCurrentUserRole");
-    if (role === "Admin") {
+    const data = await post("/Account/authenticate", values);
+    console.log(data.user.jwToken);
+    localStorage.setItem("jwToken", data.user.jwToken);
+    const response = await get("/Account/GetCurrentUserRole");
+    if (response.role === "Admin") {
       navigate("../adminInfo");
-    } else if (role == "Editor") {
+    } else if (response.role == "Editor") {
       navigate("../editorInfo");
     } else navigate("../blogPage");
   }
