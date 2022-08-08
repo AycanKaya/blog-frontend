@@ -34,8 +34,8 @@ export default function GenerateRows() {
   const [rowArray, setRowArray] = useState<IRow[]>([]);
 
   function getAllUserInfo() {
-    get("/Account/GetAllUserInfo").then((response: IRow[]) => {
-      setRowArray(response);
+    get("/Account/GetAllUserInfo").then((response: any) => {
+      setRowArray(response.userInfos);
     });
   }
   useEffect(() => {
