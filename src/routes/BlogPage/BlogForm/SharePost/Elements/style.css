@@ -1,0 +1,22 @@
+.divColor {
+  background-color: #5989b4a9;
+  margin: 30px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 17px;
+}
+.social {
+  color: #265177;
+  width: auto;
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10px;
+
+  padding-bottom: 10px;
+}
+.header1 {
+  color: #521d1d;
+  width: auto;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  padding: 5px;
+}
