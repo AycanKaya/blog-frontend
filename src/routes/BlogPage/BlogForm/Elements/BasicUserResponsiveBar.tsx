@@ -20,7 +20,7 @@ export interface PostValues {
   title: string;
   content: string;
 }
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["Home Page", "Profile"];
 const settings = ["Settings", "Logout"];
 
 const ResponsiveAppBar = () => {
@@ -65,6 +65,20 @@ const ResponsiveAppBar = () => {
     }
     if (setting === "Settings") {
       navigate("../blogPage");
+    }
+  };
+
+  const handleLogout2 = (
+    event: React.MouseEvent<HTMLElement>,
+    pages: string
+  ) => {
+    setAnchorElNav(null);
+    if (pages === "Home Page") {
+      localStorage.removeItem("jwToken");
+      navigate("../login");
+    }
+    if (pages === "Profile") {
+      navigate("../sharePost");
     }
   };
 
@@ -173,7 +187,7 @@ const ResponsiveAppBar = () => {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  onClick={(event) => handleLogout2(event, page)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {page}
