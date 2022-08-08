@@ -1,10 +1,17 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import "./style.css";
 import { get } from "../../../api/axios";
 import SetApprove from "./SetApprove";
+import ReactDOM from "react-dom";
 
 interface IPost {
   id: number;
@@ -25,11 +32,9 @@ interface IRow {
 const SettingPosts = () => {
   const [rowArray, setRowArray] = useState<IRow[]>([]);
 
-  const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
-  const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
   function getAllUserInfo() {
-    get("/EditorUser/GetPassivePosts").then((response: IRow[]) => {
-      setRowArray(response);
+    get("/EditorUser/GetPassivePosts").then((response: any) => {
+      setRowArray(response.posts);
     });
   }
   useEffect(() => {
@@ -71,7 +76,7 @@ const SettingPosts = () => {
       field: "title",
       width: 170,
       cellRenderer: (params: any) => {
-        return params.data.post.title;
+        return params.data.title;
       },
     },
     {
@@ -81,7 +86,7 @@ const SettingPosts = () => {
       width: 500,
 
       cellRenderer: (params: any) => {
-        return params.data.post.content;
+        return params.data.content;
       },
     },
     {
@@ -92,6 +97,13 @@ const SettingPosts = () => {
       },
     },
   ];
+
+  function updatePage() {
+    const root = ReactDOM.render(
+      <AgGridReact />,
+      document.getElementById("root")
+    );
+  }
 
   return (
     <div style={{ height: "600px", width: "auto" }}>
