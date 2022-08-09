@@ -11,6 +11,7 @@ import EditorSettingsPage from "./EditorPages/SettingsPage/Settings";
 import SharePost from "./BlogPage/BlogForm/SharePost";
 import UserHomePage from "./BlogPage/BlogForm/HomePage";
 import EditorHomePage from "./EditorPages/EditorHomePage";
+import WaitingAndCancelledPosts from "./BlogPage/BlogForm/WaitingAndCancelledPosts";
 
 export default function Routes() {
   return (
@@ -27,6 +28,7 @@ export default function Routes() {
         <Route path="sharePost" element={<SharePost />} />
         <Route path="basicUserHomePage" element={<UserHomePage />} />
         <Route path="editorHomePage" element={<EditorHomePage />} />
+        <Route path="waitingPosts" element={<WaitingAndCancelledPosts />} />
       </Route>
     </BaseRoutes>
   );
