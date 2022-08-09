@@ -8,6 +8,9 @@ import AdminPage from "./AdminPage";
 import SettingsPage from "./AdminPage/SettingsPage.tsx";
 import EditorPage from "./EditorPages";
 import EditorSettingsPage from "./EditorPages/SettingsPage/Settings";
+import SharePost from "./BlogPage/BlogForm/SharePost";
+import UserHomePage from "./BlogPage/BlogForm/HomePage";
+import EditorHomePage from "./EditorPages/EditorHomePage";
 
 export default function Routes() {
   return (
@@ -21,6 +24,9 @@ export default function Routes() {
         <Route path="adminInfo" element={<SettingsPage />} />
         <Route path="editorPostSettings" element={<EditorPage />} />
         <Route path="editorInfo" element={<EditorSettingsPage />} />
+        <Route path="sharePost" element={<SharePost />} />
+        <Route path="basicUserHomePage" element={<UserHomePage />} />
+        <Route path="editorHomePage" element={<EditorHomePage />} />
       </Route>
     </BaseRoutes>
   );
