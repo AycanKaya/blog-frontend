@@ -20,7 +20,7 @@ export interface PostValues {
   title: string;
   content: string;
 }
-const pages = ["Blog"];
+const pages = ["Home Page"];
 const settings = ["Settings", "Logout", "Post Settings"];
 
 const ResponsiveAppBar = () => {
@@ -70,6 +70,15 @@ const ResponsiveAppBar = () => {
       navigate("../editorPostSettings");
     }
   };
+  const handleLogout2 = (
+    event: React.MouseEvent<HTMLElement>,
+    pages: string
+  ) => {
+    setAnchorElNav(null);
+    if (pages === "Home Page") {
+      navigate("../editorHomePage");
+    }
+  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -103,7 +112,7 @@ const ResponsiveAppBar = () => {
               variant="h6"
               noWrap
               component="a"
-              href="/"
+              href="/editorHomePage"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -176,7 +185,7 @@ const ResponsiveAppBar = () => {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  onClick={(event) => handleLogout2(event, page)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {page}
