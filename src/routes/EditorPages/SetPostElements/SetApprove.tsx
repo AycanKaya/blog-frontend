@@ -23,10 +23,10 @@ const SetApprove = (params: any) => {
   }
 
   function handleConfirmClick() {
-    ActivateRequest({ postID: params.post.id, isApprove: true });
+    ActivateRequest({ postID: params.postId, isApprove: true });
   }
   function handleCancelClick() {
-    ActivateRequest({ postID: params.post.id, isApprove: false });
+    ActivateRequest({ postID: params.postId, isApprove: false });
   }
   const theme = createTheme({
     palette: {
