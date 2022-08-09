@@ -1,20 +1,13 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import "./style.css";
 import { get } from "../../../api/axios";
 import SetApprove from "./SetApprove";
-import ReactDOM from "react-dom";
 
 interface IPost {
-  id: number;
+  postId: number;
   title: string;
   content: string;
   isApprove: boolean;
@@ -29,11 +22,12 @@ interface IRow {
   post: IPost;
 }
 
-const SettingPosts = () => {
+const SettingPosts: React.FC = () => {
   const [rowArray, setRowArray] = useState<IRow[]>([]);
 
   function getAllUserInfo() {
     get("/EditorUser/GetPassivePosts").then((response: any) => {
+      console.log(response);
       setRowArray(response.posts);
     });
   }
@@ -49,7 +43,6 @@ const SettingPosts = () => {
     filter: true,
     cellStyle: {
       fontSize: "12px",
-
       justifyContent: "center",
       alignItems: "center",
     },
@@ -67,14 +60,14 @@ const SettingPosts = () => {
     },
     {
       field: "authorName",
-      width: 110,
+      width: 150,
       cellRenderer: (params: any) => {
         return params.data.authorName;
       },
     },
     {
       field: "title",
-      width: 170,
+      width: 180,
       cellRenderer: (params: any) => {
         return params.data.title;
       },
@@ -83,8 +76,7 @@ const SettingPosts = () => {
       field: "content",
       wrapText: true,
       autoHeight: true,
-      width: 500,
-
+      width: 600,
       cellRenderer: (params: any) => {
         return params.data.content;
       },
@@ -93,17 +85,10 @@ const SettingPosts = () => {
       field: "isApprove",
       width: 200,
       cellRenderer: (params: any) => {
-        return SetApprove(params.data);
+        return SetApprove(params.data, { getAllUserInfo });
       },
     },
   ];
-
-  function updatePage() {
-    const root = ReactDOM.render(
-      <AgGridReact />,
-      document.getElementById("root")
-    );
-  }
 
   return (
     <div style={{ height: "600px", width: "auto" }}>
