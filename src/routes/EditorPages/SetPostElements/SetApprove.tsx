@@ -1,25 +1,33 @@
-import { post } from "../../../api/axios";
+import { get, post } from "../../../api/axios";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Box, createTheme, Fab, ThemeProvider } from "@mui/material";
-import { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import AgGridReact from "./SettingPosts";
-import SettingPosts from "./SettingPosts";
+import React from "react";
+interface IPost {
+  postId: number;
+  title: string;
+  content: string;
+  isApprove: boolean;
+  authorID: string;
+  createTime: Date;
+  updateTime: Date;
+}
+interface IRow {
+  authorName: string;
+  authorEmail: string;
+  post: IPost;
+}
 
-const SetApprove = (params: any) => {
+interface Props {
+  getAllUserInfo: () => void;
+}
+
+const SetApprove: React.FC<Props> = (params: any, props: Props) => {
   async function ActivateRequest(body: any) {
     await post("/EditorUser/ActivateControl", body).then((response) => {
-      updatePage();
-      return response;
+      console.log(response);
+      props.getAllUserInfo();
     });
-  }
-
-  function updatePage() {
-    const root = ReactDOM.render(
-      <AgGridReact />,
-      document.getElementById("root")
-    );
   }
 
   function handleConfirmClick() {
