@@ -74,8 +74,7 @@ const ResponsiveAppBar = () => {
   ) => {
     setAnchorElNav(null);
     if (pages === "Home Page") {
-      localStorage.removeItem("jwToken");
-      navigate("../login");
+      navigate("../basicUserHomePage");
     }
     if (pages === "Profile") {
       navigate("../sharePost");
