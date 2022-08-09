@@ -1,7 +1,6 @@
 import { Alert, Box, Card, Fab, Typography } from "@mui/material";
 import * as React from "react";
 import TextField from "@mui/material/TextField";
-import EditIcon from "@mui/icons-material/Edit";
 import { post } from "../../../../../api/axios";
 import Modal from "@mui/material/Modal";
 interface IPost {
@@ -31,14 +30,17 @@ export default function PostSharing() {
   };
 
   function handleClickPost() {
-    post("/Post/PostUser", postContent).then((response) => {
-      console.log(response);
-      if (response.succeeded) {
-        setPostContent({ title: "", content: "" });
-        return handleOpen();
-      }
-      handleOpenError();
-    });
+    post("/Post/PostUser", postContent)
+      .then((response) => {
+        if (response.succeeded) {
+          setPostContent({ title: "", content: "" });
+          return handleOpen();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return handleOpenError();
+      });
   }
 
   const sx = {
@@ -128,8 +130,8 @@ export default function PostSharing() {
         keepMounted
         open={openError}
         onClose={handleCloseError}
-        aria-labelledby="keep-mounted-modal-title2"
-        aria-describedby="keep-mounted-modal-description2"
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
       >
         <Box sx={style}>
           <Typography id="keep-mounted-modal-description2" sx={{ mt: 2 }}>
