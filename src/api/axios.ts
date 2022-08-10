@@ -14,21 +14,57 @@ function getHeaders() {
   return headers;
 }
 
+export async function request(
+  requestType: string,
+  url: string,
+  body?: any,
+  withoutHeader?: boolean
+) {
+  if (requestType === "get") {
+    await get(url, body);
+  }
+  if (requestType === "get" && withoutHeader == true) {
+    await getWithout(url);
+  }
+  if (requestType === "post") {
+    await post(url, body);
+  }
+  if (requestType === "put") {
+    await put(url, body);
+  }
+}
+
 export async function post(url: string, body?: any) {
   var headers = getHeaders();
   const { data } = await axiosInstance.post(url, body, { headers });
-  return data;
+  if (data.succeeded == true) {
+    return data;
+  }
+  return data.Message;
 }
 
 export async function get(url: string, body?: string) {
   var headers = getHeaders();
   const { data } = await axiosInstance.get(url, { headers });
-  return data;
+  if (data.succeeded == true) {
+    return data;
+  }
+  return data.Message;
+}
+export async function getWithout(url: string) {
+  const { data } = await axiosInstance.get(url);
+  if (data.succeeded == true) {
+    return data;
+  }
+  return data.Message;
 }
 
 export async function put(url: string, body?: string) {
   var headers = getHeaders();
   const { data } = await axiosInstance.put(url, body, { headers });
-  return data;
+  if (data.succeeded == true) {
+    return data;
+  }
+  return data.Message;
 }
 export default axiosInstance;
