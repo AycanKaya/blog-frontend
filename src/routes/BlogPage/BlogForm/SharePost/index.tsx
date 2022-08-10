@@ -1,6 +1,6 @@
 import ResponsiveAppBar from "../Elements/BasicUserResponsiveBar";
 import PostSharing from "./Elements/SharePosts";
-import UserPosts from "./Elements/UserPosts";
+import UserPosts from "../WaitingAndCancelledPosts/UserPosts";
 
 const SharePost = () => {
   return (
