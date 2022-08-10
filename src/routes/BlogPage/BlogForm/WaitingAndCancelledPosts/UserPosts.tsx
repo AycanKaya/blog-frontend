@@ -9,12 +9,8 @@ import "./style.css";
 import { get } from "../../../../api/axios";
 import Comments from "./Comments";
 
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
 interface IPost {
-  id: number;
+  postId: number;
   authorName: string;
   authorEmail: string;
   title: string;
@@ -86,7 +82,11 @@ const UserPosts: React.FC = () => {
             title={"Written by " + postComment.post.authorName}
             subheader={postComment.post.authorEmail}
           />
-          <Comments comments={postComment.comments} />
+          <Comments
+            comments={postComment.comments}
+            postId={postComment.post.postId}
+            getRecentFivePosts={getRecentFivePosts}
+          />
         </CardContent>
       </Card>
     </>
