@@ -16,8 +16,6 @@ import { post } from "../../../../api/axios";
 import SendIcon from "@mui/icons-material/Send";
 import { ThemeProvider } from "@emotion/react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import Alert from "@mui/material/Alert";
-import ResponseMessages from "./ResponseMessages";
 
 interface IUser {
   userID: string;
