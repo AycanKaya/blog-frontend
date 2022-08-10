@@ -4,10 +4,9 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import UserPosts from "../SharePost/Elements/UserPosts";
 import WaitingPosts from "./WaitingPosts";
 import CancelledPosts from "./CancelledPosts";
-import UserPostsDeneme from "./UserPostsDeneme";
+import UserPostsDeneme from "./UserPosts";
 export default function AllPosts() {
   const [value, setValue] = React.useState("1");
 
