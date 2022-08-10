@@ -38,6 +38,39 @@ const Comments: React.FC<Props> = ({
   getRecentFivePosts,
 }) => {
   const [reply, setReply] = useState("");
+
+  const [body, setBody] = useState<requestBody>({
+    content: "",
+    postID: postId,
+  });
+
+  const onClick = () => {
+    post("/Comment/ShareComment", body)
+      .then((response) => {
+        console.log(response);
+        console.log(body);
+        setReply("");
+        getRecentFivePosts();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleChange = (event: any) => {
+    setReply(event.target.value);
+    setBody({ ...body, content: reply });
+    console.log(postId, "veee");
+  };
+
+  const sx = {
+    marginTop: "20px",
+    border: "none",
+    borderBottom: "0",
+    boxShadow: "0",
+    width: "500px",
+  };
+
   const commentList = comments.map((comment: IComment) => (
     <Card
       sx={{
@@ -71,38 +104,6 @@ const Comments: React.FC<Props> = ({
       </CardContent>
     </Card>
   ));
-
-  const [body, setBody] = useState<requestBody>({
-    content: "",
-    postID: postId,
-  });
-
-  const onClick = () => {
-    post("/Comment/ShareComment", body)
-      .then((response) => {
-        console.log(response);
-        console.log(body);
-        setReply("");
-        getRecentFivePosts();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleChange = (event: any) => {
-    setReply(event.target.value);
-    setBody({ ...body, content: reply });
-    console.log(postId, "veee");
-  };
-
-  const sx = {
-    marginTop: "20px",
-    border: "none",
-    borderBottom: "0",
-    boxShadow: "0",
-    width: "500px",
-  };
 
   return (
     <Accordion sx={sx}>
