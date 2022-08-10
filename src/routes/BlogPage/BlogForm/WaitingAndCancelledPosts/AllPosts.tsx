@@ -7,6 +7,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import WaitingPosts from "./WaitingPosts";
 import CancelledPosts from "./CancelledPosts";
 import UserPostsDeneme from "./UserPosts";
+
 export default function AllPosts() {
   const [value, setValue] = React.useState("1");
 
