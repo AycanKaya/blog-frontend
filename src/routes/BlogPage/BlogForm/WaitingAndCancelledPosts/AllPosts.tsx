@@ -6,7 +6,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import WaitingPosts from "./WaitingPosts";
 import CancelledPosts from "./CancelledPosts";
-import UserPostsDeneme from "./UserPosts";
+import UserPosts from "./UserPosts";
 
 export default function AllPosts() {
   const [value, setValue] = React.useState("1");
@@ -45,7 +45,7 @@ export default function AllPosts() {
           </TabList>
         </Box>
         <TabPanel value="1">
-          <UserPostsDeneme />
+          <UserPosts />
         </TabPanel>
         <TabPanel value="2">
           <WaitingPosts />
