@@ -36,13 +36,13 @@ interface IPostComments {
 const UserPosts: React.FC = () => {
   const [postComments, setPostComments] = React.useState<IPostComments[]>([]);
 
-  function getRecentFivePosts() {
+  function getUserPosts() {
     get("/Post/GetUserPosts").then((response: any) => {
       setPostComments(response.posts);
     });
   }
   useEffect(() => {
-    getRecentFivePosts();
+    getUserPosts();
   }, []);
 
   const sx = {
@@ -57,11 +57,11 @@ const UserPosts: React.FC = () => {
     <>
       <Card sx={sx}>
         <CardContent>
-          <Posts post={postComment.post} />
+          <Posts Post={postComment.post} getUserPosts={getUserPosts} />
           <Comments
             comments={postComment.comments}
             postId={postComment.post.postId}
-            getRecentFivePosts={getRecentFivePosts}
+            getRecentFivePosts={getUserPosts}
           />
         </CardContent>
       </Card>
