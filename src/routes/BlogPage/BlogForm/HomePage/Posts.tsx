@@ -257,6 +257,7 @@ const Posts: React.FC<Props> = ({ Post, getUserPosts }) => {
           Post
         </Fab>
       </Box>
+
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}

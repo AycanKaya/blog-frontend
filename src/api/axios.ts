@@ -43,6 +43,15 @@ export async function post(url: string, body?: any) {
   return data.Message;
 }
 
+export async function deleted(url: string) {
+  var headers = getHeaders();
+  const { data } = await axiosInstance.delete(url, { headers });
+  if (data.succeeded == true) {
+    return data;
+  }
+  return data.Message;
+}
+
 export async function get(url: string, body?: string) {
   var headers = getHeaders();
   const { data } = await axiosInstance.get(url, { headers });
@@ -59,7 +68,7 @@ export async function getWithout(url: string) {
   return data.Message;
 }
 
-export async function put(url: string, body?: string) {
+export async function put(url: string, body?: any) {
   var headers = getHeaders();
   const { data } = await axiosInstance.put(url, body, { headers });
   if (data.succeeded == true) {

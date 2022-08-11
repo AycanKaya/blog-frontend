@@ -10,7 +10,7 @@ export default function Login() {
 
   async function handleSubmit(values: LoginValues) {
     const data = await post("/Account/authenticate", values);
-    console.log(data.user.jwToken);
+
     localStorage.setItem("jwToken", data.user.jwToken);
     const response = await get("/Account/GetCurrentUserRole");
     if (response.role === "Admin") {
