@@ -9,12 +9,17 @@ import {
   Button,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useEffect, useState } from "react";
 import { post } from "../../../../api/axios";
+import MenuForComment from "./MenuForComment";
 
 interface IComment {
   id: number;
@@ -27,13 +32,16 @@ interface IComment {
 interface Props {
   postId: number;
   comments: IComment[];
-  getRecentFivePosts: () => void;
+  getRecentFivePosts: () => void; //ismi düzelt !!!!
 }
 
 interface requestBody {
   content: string;
   postID: number;
 }
+const options = ["Delete", "Update"];
+
+const ITEM_HEIGHT = 48;
 
 const Comments: React.FC<Props> = ({
   postId,
@@ -50,8 +58,6 @@ const Comments: React.FC<Props> = ({
   const onClick = () => {
     post("/Comment/ShareComment", body)
       .then((response) => {
-        console.log(response);
-        console.log(body);
         setReply("");
         getRecentFivePosts();
       })
@@ -63,7 +69,6 @@ const Comments: React.FC<Props> = ({
   const handleChange = (event: any) => {
     setReply(event.target.value);
     setBody({ ...body, content: reply });
-    console.log(postId, "veee");
   };
 
   const sx = {
@@ -72,6 +77,15 @@ const Comments: React.FC<Props> = ({
     borderBottom: "0",
     boxShadow: "0",
     width: "500px",
+  };
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const commentList = comments.map((comment: IComment) => (
@@ -98,7 +112,9 @@ const Comments: React.FC<Props> = ({
         subheader={comment.created.toString()}
       />
 
-      <CardContent sx={{ padding: "0px" }}>
+      <MenuForComment commentId={comment.id} getPosts={getRecentFivePosts} />
+
+      <CardContent sx={{ padding: "0px", minWidth: "500px" }}>
         <Typography color="text." sx={{ fontSize: "12px", padding: "7px" }}>
           <Box key={comment.id}>
             <div key={comment.id}>{comment.content}</div>
