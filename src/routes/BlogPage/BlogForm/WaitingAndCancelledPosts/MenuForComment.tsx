@@ -15,11 +15,16 @@ const ITEM_HEIGHT = 48;
 interface Props {
   commentId: number;
   getPosts: () => void;
+  handleUpdateComment: () => void;
 }
 export interface State extends SnackbarOrigin {
   open: boolean;
 }
-const MenuForComment: React.FC<Props> = ({ commentId, getPosts }) => {
+const MenuForComment: React.FC<Props> = ({
+  commentId,
+  getPosts,
+  handleUpdateComment,
+}) => {
   const [openDialog, setOpenDialog] = React.useState(false);
   const [errorState, setErrorState] = React.useState<State>({
     open: false,
@@ -42,6 +47,7 @@ const MenuForComment: React.FC<Props> = ({ commentId, getPosts }) => {
   const handleOnClick = (option: any) => {
     setAnchorEl(null);
     if (option === "Update") {
+      handleUpdateComment();
     }
     if (option === "Delete") {
       setOpenDialog(true);

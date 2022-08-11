@@ -20,3 +20,8 @@
   font-size: 20px;
   padding: 5px;
 }
+.css-1sltwf-MuiButtonBase-root-MuiFab-root.Mui-disabled {
+  color: #ffff;
+  box-shadow: none;
+  background-color: #ffff;
+}
