@@ -5,6 +5,8 @@ import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { deleted } from "../../../../api/axios";
 import DialogMessage from "./DialogMessage";
+import { SnackbarOrigin } from "@mui/material";
+import ErrorMessages from "./ErrorMessages";
 
 const options = ["Delete", "Update"];
 
@@ -14,10 +16,16 @@ interface Props {
   commentId: number;
   getPosts: () => void;
 }
-
+export interface State extends SnackbarOrigin {
+  open: boolean;
+}
 const MenuForComment: React.FC<Props> = ({ commentId, getPosts }) => {
   const [openDialog, setOpenDialog] = React.useState(false);
-
+  const [errorState, setErrorState] = React.useState<State>({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -25,6 +33,10 @@ const MenuForComment: React.FC<Props> = ({ commentId, getPosts }) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleError = (newState: SnackbarOrigin) => () => {
+    setErrorState({ open: true, ...newState });
   };
 
   const handleOnClick = (option: any) => {
@@ -36,14 +48,30 @@ const MenuForComment: React.FC<Props> = ({ commentId, getPosts }) => {
     }
   };
 
+  const [errorMessage, setErrorMessage] = React.useState("");
   function DeleteComment() {
     deleted("/Comment/DeleteComment?commentID=" + commentId)
       .then((response) => {
-        console.log(response);
+        if (!response.succeeded) {
+          setErrorMessage(response.err);
+          handleError({
+            vertical: "top",
+            horizontal: "center",
+          });
+          setErrorState({ ...errorState, open: true });
+        }
+
         getPosts();
       })
       .catch((err) => {
-        console.log(err);
+        console.log("ERROR", err);
+        setErrorMessage(err.response.data.Error);
+        handleError({
+          vertical: "top",
+          horizontal: "center",
+        });
+
+        setErrorState({ ...errorState, open: true });
       });
   }
 
@@ -94,6 +122,11 @@ const MenuForComment: React.FC<Props> = ({ commentId, getPosts }) => {
         object={"comment"}
         setOpenDialog={setOpenDialog}
         openDialog={openDialog}
+      />
+      <ErrorMessages
+        errorState={errorState}
+        setErrorState={setErrorState}
+        errorMessage={errorMessage}
       />
     </>
   );
