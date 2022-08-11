@@ -1,25 +1,58 @@
 import {
-  Card,
-  Avatar,
-  Box,
-  CardContent,
-  CardHeader,
   Typography,
   TextField,
   Button,
+  alpha,
+  InputBase,
+  styled,
 } from "@mui/material";
-import { red } from "@mui/material/colors";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { post } from "../../../../api/axios";
-import MenuForComment from "./MenuForComment";
+import Comment from "./Comment";
+
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  "label + &": {
+    marginTop: theme.spacing(3),
+  },
+  "& .MuiInputBase-input": {
+    borderRadius: 4,
+    position: "relative",
+    display: "block",
+    backgroundColor: theme.palette.mode === "light" ? "#fcfcfb" : "#2b2b2b",
+    border: "none",
+    fontSize: 16,
+    width: "960px",
+    padding: "0",
+    margin: "0",
+    transition: theme.transitions.create([
+      "border-color",
+      "background-color",
+      "box-shadow",
+    ]),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    "&:focus": {
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}));
 
 interface IComment {
   id: number;
@@ -89,39 +122,9 @@ const Comments: React.FC<Props> = ({
   };
 
   const commentList = comments.map((comment: IComment) => (
-    <Card
-      sx={{
-        maxWidth: "fit-content",
-        borderRadius: "0px",
-        boxShadow: "0",
-      }}
-    >
-      <CardHeader
-        sx={{ margin: "0px", padding: "0px", fontSize: "15px" }}
-        avatar={
-          <Avatar
-            sx={{
-              bgcolor: red[500],
-              width: "20px",
-              height: "20px",
-            }}
-            aria-label="recipe"
-          ></Avatar>
-        }
-        title={comment.authorName}
-        subheader={comment.created.toString()}
-      />
-
-      <MenuForComment commentId={comment.id} getPosts={getRecentFivePosts} />
-
-      <CardContent sx={{ padding: "0px", minWidth: "500px" }}>
-        <Typography color="text." sx={{ fontSize: "12px", padding: "7px" }}>
-          <Box key={comment.id}>
-            <div key={comment.id}>{comment.content}</div>
-          </Box>
-        </Typography>
-      </CardContent>
-    </Card>
+    <div>
+      <Comment commentObject={comment} getPosts={getRecentFivePosts} />
+    </div>
   ));
 
   return (
