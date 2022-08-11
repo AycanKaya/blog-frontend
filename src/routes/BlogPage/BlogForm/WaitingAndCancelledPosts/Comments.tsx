@@ -15,6 +15,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useEffect, useState } from "react";
 import { post } from "../../../../api/axios";
+
 interface IComment {
   id: number;
   postID: number;
@@ -22,11 +23,13 @@ interface IComment {
   authorName: string;
   created: Date;
 }
+
 interface Props {
   postId: number;
   comments: IComment[];
   getRecentFivePosts: () => void;
 }
+
 interface requestBody {
   content: string;
   postID: number;
