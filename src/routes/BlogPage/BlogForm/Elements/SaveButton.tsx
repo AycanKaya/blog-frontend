@@ -25,14 +25,6 @@ interface UserProps {
 }
 
 const ButtonEditör: React.FC<UserProps> = ({ userInfo, edit, setEdit }) => {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#3B719F",
-      },
-    },
-  });
-
   async function updateUser() {
     await post("/Account/UserInfo", userInfo).then((response: IUser) => {
       console.log("Success", response);
@@ -51,19 +43,17 @@ const ButtonEditör: React.FC<UserProps> = ({ userInfo, edit, setEdit }) => {
     marginLeft: "50px",
   };
   return (
-    <ThemeProvider theme={theme}>
-      <Button
-        sx={sx}
-        size="large"
-        variant="contained"
-        color="primary"
-        endIcon={<SendIcon />}
-        disabled={edit}
-        onClick={updateUserInformation}
-      >
-        SAVE
-      </Button>
-    </ThemeProvider>
+    <Button
+      sx={sx}
+      size="large"
+      variant="contained"
+      color="primary"
+      endIcon={<SendIcon />}
+      disabled={edit}
+      onClick={updateUserInformation}
+    >
+      SAVE
+    </Button>
   );
 };
 export default ButtonEditör;

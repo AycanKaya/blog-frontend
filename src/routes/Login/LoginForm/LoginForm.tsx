@@ -2,10 +2,8 @@ import { FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Sheet from "@mui/joy/Sheet";
-import Typography from "@mui/joy/Typography";
 import { Link } from "react-router-dom";
-import HomeResponsiveBar from "../../Home/HomeResponsiveBar";
+import { Box, Typography } from "@mui/material";
 
 export interface LoginValues {
   email: string;
@@ -28,14 +26,13 @@ export default function LoginForm(props: LoginProps) {
     onSubmit: props.onSubmit,
   });
 
-  if (localStorage.getItem("jwToken") != null)
-    return <Link to="/">Giriş Yaptınız !!!</Link>;
+  if (localStorage.getItem("jwToken") != null) return <Link to="/"></Link>;
 
   return (
     <>
       <FormikProvider value={formik}>
-        <form onSubmit={formik.handleSubmit}>
-          <Sheet
+        <form name="login-form" onSubmit={formik.handleSubmit}>
+          <Box
             sx={{
               maxWidth: 400,
               mx: "auto",
@@ -50,10 +47,10 @@ export default function LoginForm(props: LoginProps) {
             }}
           >
             <div>
-              <Typography level="h4" component="h1">
+              <Typography variant="h4" component="h1">
                 <b>Welcome!</b>
               </Typography>
-              <Typography level="body2">Sign in to continue</Typography>
+              <Typography>Sign in to continue</Typography>
             </div>
 
             <TextField
@@ -89,7 +86,7 @@ export default function LoginForm(props: LoginProps) {
             <Button variant="contained" type="submit">
               Giriş Yap
             </Button>
-          </Sheet>
+          </Box>
         </form>
       </FormikProvider>
     </>
