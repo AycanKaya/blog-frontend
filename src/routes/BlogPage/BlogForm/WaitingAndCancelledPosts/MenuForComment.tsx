@@ -13,6 +13,7 @@ const options = ["Delete", "Update"];
 const ITEM_HEIGHT = 48;
 
 interface Props {
+  authorId: string;
   commentId: number;
   getPosts: () => void;
   handleUpdateComment: () => void;
@@ -21,6 +22,7 @@ export interface State extends SnackbarOrigin {
   open: boolean;
 }
 const MenuForComment: React.FC<Props> = ({
+  authorId,
   commentId,
   getPosts,
   handleUpdateComment,
@@ -47,7 +49,12 @@ const MenuForComment: React.FC<Props> = ({
   const handleOnClick = (option: any) => {
     setAnchorEl(null);
     if (option === "Update") {
-      handleUpdateComment();
+      if (localStorage.getItem("id") === authorId) {
+        handleUpdateComment();
+      } else {
+        setErrorMessage("Only the commenter can update the comment");
+        setErrorState({ ...errorState, open: true });
+      }
     }
     if (option === "Delete") {
       setOpenDialog(true);
@@ -56,8 +63,11 @@ const MenuForComment: React.FC<Props> = ({
 
   const [errorMessage, setErrorMessage] = React.useState("");
   function DeleteComment() {
+    console.log("DELETE COMMENT ", commentId);
+
     deleted("/Comment/DeleteComment?commentID=" + commentId)
       .then((response) => {
+        console.log(response);
         if (!response.succeeded) {
           setErrorMessage(response.err);
           handleError({
@@ -65,9 +75,9 @@ const MenuForComment: React.FC<Props> = ({
             horizontal: "center",
           });
           setErrorState({ ...errorState, open: true });
+        } else {
+          getPosts();
         }
-
-        getPosts();
       })
       .catch((err) => {
         console.log("ERROR", err);
