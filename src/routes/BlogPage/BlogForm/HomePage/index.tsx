@@ -1,4 +1,4 @@
-import Search from "../../../Home/Elements/Search";
+import Search from "./Search";
 import ResponsiveAppBar from "../Elements/BasicUserResponsiveBar";
 import AllPosts from "./AllPosts";
 
@@ -7,7 +7,6 @@ const UserHomePage = () => {
     <>
       <ResponsiveAppBar />
       <Search />
-      <AllPosts />
     </>
   );
 };
