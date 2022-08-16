@@ -1,9 +1,13 @@
-export default interface Post {
+export default interface IPost {
+  postId: number;
+  authorName: string;
+  authorEmail: string;
   title: string;
   content: string;
+  isApprove: boolean;
+  isDeleted: boolean;
   isActive: boolean;
-  createdTime: Date;
-  updatedTime: Date;
   authorID: string;
-  id: number;
+  createTime: Date;
+  updateTime: Date;
 }
