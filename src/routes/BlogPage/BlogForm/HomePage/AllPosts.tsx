@@ -1,58 +1,24 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
-import { useEffect } from "react";
-import { Avatar, CardContent, CardHeader, Typography } from "@mui/material";
-import { red } from "@mui/material/colors";
-import "./style.css";
-import { get } from "../../../../api/axios";
-import Comments from "../WaitingAndCancelledPosts/Comments";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import { Avatar, CardContent, CardHeader, Typography } from '@mui/material';
+import { red } from '@mui/material/colors';
+import './style.css';
+import Comments from '../WaitingAndCancelledPosts/Comments';
+import IPostComments from '../../../../api/model/postComment';
+import PostTags from './PostTags';
 
-interface IPost {
-  postId: number;
-  authorName: string;
-  authorEmail: string;
-  title: string;
-  content: string;
-  isApprove: boolean;
-  isDeleted: boolean;
-  isActive: boolean;
-  authorID: string;
-  createTime: Date;
-  updateTime: Date;
+interface Props {
+  postComments: IPostComments[];
+  getAllPosts: () => void;
 }
-interface IComment {
-  id: number;
-  postID: number;
-  content: string;
-  authorName: string;
-  created: Date;
-}
-interface IPostComments {
-  post: IPost;
-  comments: IComment[];
-}
-const AllPosts: React.FC = () => {
-  const [postComments, setPostComments] = React.useState<IPostComments[]>([]);
 
-  function getAllPosts() {
-    get("/Post/PostComments").then((response: any) => {
-      console.log("ÇALISTI", response);
-
-      setPostComments(response.posts);
-    });
-  }
-  useEffect(() => {
-    getAllPosts();
-  }, []);
-
+const AllPosts: React.FC<Props> = ({ postComments, getAllPosts }) => {
   const sx = {
-    maxWidth: "fit-content",
-    marginLeft: "150px",
-    marginRight: "150px",
-    marginTop: "50px",
-    padding: "10px",
+    maxWidth: 'fit-content',
+    marginLeft: '150px',
+    marginRight: '150px',
+    marginTop: '50px',
+    padding: '10px'
   };
   const postList = postComments.map((postComment: IPostComments) => (
     <>
@@ -67,23 +33,23 @@ const AllPosts: React.FC = () => {
               <Avatar
                 sx={{
                   bgcolor: red[500],
-                  width: "20px",
-                  height: "20px",
+                  width: '20px',
+                  height: '20px'
                 }}
-                aria-label="recipe"
-              ></Avatar>
+                aria-label="recipe"></Avatar>
             }
             sx={{
               bottom: 0,
 
-              fontSize: "10px",
-              width: "auto",
-              float: "right",
+              fontSize: '10px',
+              width: 'auto',
+              float: 'right'
             }}
-            titleTypographyProps={{ fontSize: "0.657rem" }}
-            title={"Written by " + postComment.post.authorName}
+            titleTypographyProps={{ fontSize: '0.657rem' }}
+            title={'Written by ' + postComment.post.authorName}
             subheader={postComment.post.authorEmail}
           />
+          <PostTags postId={postComment.post.postId} />
           <Comments
             comments={postComment.comments}
             postId={postComment.post.postId}
