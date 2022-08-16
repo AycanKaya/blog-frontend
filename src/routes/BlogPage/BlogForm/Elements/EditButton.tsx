@@ -10,14 +10,6 @@ interface EditProps {
 }
 
 const ButtonEditör: React.FC<EditProps> = ({ setEdit }) => {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#3B719F",
-      },
-    },
-  });
-
   function handleEditableChange() {
     setEdit(false);
   }
@@ -29,17 +21,15 @@ const ButtonEditör: React.FC<EditProps> = ({ setEdit }) => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Button
-        sx={sx}
-        variant="contained"
-        size="large"
-        onClick={handleEditableChange}
-        endIcon={<EditIcon />}
-      >
-        EDIT
-      </Button>
-    </ThemeProvider>
+    <Button
+      sx={sx}
+      variant="contained"
+      size="large"
+      onClick={handleEditableChange}
+      endIcon={<EditIcon />}
+    >
+      EDIT
+    </Button>
   );
 };
 export default ButtonEditör;
