@@ -36,27 +36,16 @@ const SetApprove: React.FC<Props> = (params: any, props: Props) => {
   function handleCancelClick() {
     ActivateRequest({ postID: params.postId, isApprove: false });
   }
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#BDF8A3",
-      },
-      secondary: {
-        main: "#8F1402",
-      },
-    },
-  });
+
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ "& > :not(style)": { m: 0.3 } }}>
-        <Fab color="primary" aria-label="add" onClick={handleConfirmClick}>
-          <CheckIcon />
-        </Fab>
-        <Fab color="secondary" aria-label="edit" onClick={handleCancelClick}>
-          <ClearIcon />
-        </Fab>
-      </Box>
-    </ThemeProvider>
+    <Box sx={{ "& > :not(style)": { m: 0.3 } }}>
+      <Fab color="primary" aria-label="add" onClick={handleConfirmClick}>
+        <CheckIcon />
+      </Fab>
+      <Fab color="secondary" aria-label="edit" onClick={handleCancelClick}>
+        <ClearIcon />
+      </Fab>
+    </Box>
   );
 };
 export default SetApprove;
