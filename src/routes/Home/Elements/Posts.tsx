@@ -40,6 +40,7 @@ interface IComment {
   postID: number;
   content: string;
   authorName: string;
+  authorId: string;
   created: Date;
 }
 interface IPostComments {
