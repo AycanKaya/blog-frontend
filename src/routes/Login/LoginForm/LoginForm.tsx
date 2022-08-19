@@ -1,9 +1,10 @@
-import { FormikProvider, useFormik } from "formik";
-import * as yup from "yup";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
+import { FormikProvider, useFormik } from 'formik';
+import * as yup from 'yup';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import { Box, Typography } from '@mui/material';
+import Auth0LoginButton from './Auth0LoginButton';
 
 export interface LoginValues {
   email: string;
@@ -12,7 +13,7 @@ export interface LoginValues {
 
 const validationSchema: yup.SchemaOf<LoginValues> = yup.object({
   email: yup.string().required().email(),
-  password: yup.string().required().min(6),
+  password: yup.string().required().min(6)
 });
 
 interface LoginProps {
@@ -22,11 +23,11 @@ interface LoginProps {
 export default function LoginForm(props: LoginProps) {
   const formik = useFormik<LoginValues>({
     validationSchema,
-    initialValues: { email: "", password: "" },
-    onSubmit: props.onSubmit,
+    initialValues: { email: '', password: '' },
+    onSubmit: props.onSubmit
   });
 
-  if (localStorage.getItem("jwToken") != null) return <Link to="/"></Link>;
+  if (localStorage.getItem('jwToken') != null) return <Link to="/"></Link>;
 
   return (
     <>
@@ -35,17 +36,16 @@ export default function LoginForm(props: LoginProps) {
           <Box
             sx={{
               maxWidth: 400,
-              mx: "auto",
+              mx: 'auto',
               my: 4,
               py: 3,
               px: 2,
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
               gap: 2,
-              borderRadius: "sm",
-              boxShadow: "md",
-            }}
-          >
+              borderRadius: 'sm',
+              boxShadow: 'md'
+            }}>
             <div>
               <Typography variant="h4" component="h1">
                 <b>Welcome!</b>
@@ -59,9 +59,7 @@ export default function LoginForm(props: LoginProps) {
               variant="outlined"
               error={!!(formik.errors.email && formik.touched.email)}
               helperText={
-                formik.errors.email && formik.touched.email
-                  ? formik.errors.email
-                  : undefined
+                formik.errors.email && formik.touched.email ? formik.errors.email : undefined
               }
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -86,6 +84,7 @@ export default function LoginForm(props: LoginProps) {
             <Button variant="contained" type="submit">
               Giriş Yap
             </Button>
+            <Auth0LoginButton />
           </Box>
         </form>
       </FormikProvider>
