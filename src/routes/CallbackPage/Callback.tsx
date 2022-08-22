@@ -1,8 +1,13 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import ResponsiveAppBar from '../BlogPage/BlogForm/Elements/BasicUserResponsiveBar';
 
 export default function Callback() {
-  const { error } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
 
+  const accessToken = getAccessTokenSilently();
+
+  const { error } = useAuth0();
+  console.log('accessToken', accessToken);
   if (error) {
     return (
       <div>
@@ -22,8 +27,8 @@ export default function Callback() {
 
   return (
     <div className="page-layout">
+      <ResponsiveAppBar />
       CALLBACK PAGEEE
-      <div className="page-layout__content" />
     </div>
   );
 }
