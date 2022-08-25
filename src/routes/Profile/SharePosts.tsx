@@ -3,12 +3,13 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import * as React from 'react';
-import { get, getWithout, post } from '../../../../../api/axios';
+import { get, getWithout, post } from '../../api/axios';
 import Modal from '@mui/material/Modal';
 import './style.css';
 import Avatar from '@mui/material/Avatar';
-import ITag from '../../../../../api/model/tag';
+import ITag from '../../api/model/tag';
 import { useState } from 'react';
+import { Level } from '../../api/model/level';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -46,12 +47,6 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 interface IPost {
   title: string;
   content: string;
-}
-interface Level {
-  level: number;
-  levelName: string;
-  sumOfPosts: string;
-  rightToPost: number;
 }
 
 interface TagOptionType {
@@ -110,7 +105,7 @@ const styleSucceed = {
 };
 const filter = createFilterOptions<TagOptionType>();
 
-export default function PostSharing() {
+export function SharePosts() {
   const [open, setOpen] = useState(false);
   const [openError, setOpenError] = useState(false);
 

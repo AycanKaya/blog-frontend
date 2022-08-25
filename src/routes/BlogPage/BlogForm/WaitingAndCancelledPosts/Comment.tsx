@@ -6,15 +6,14 @@ import {
   CardContent,
   CardHeader,
   styled,
-  Fab,
-  ThemeProvider,
-  createTheme
+  Fab
 } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { useState } from 'react';
 import { put } from '../../../../api/axios';
-import ErrorMessages from './ErrorMessages';
-import MenuForComment, { State } from './MenuForComment';
+import IComment from '../../../../api/model/comment';
+
+import MenuForComment from './MenuForComment';
 import './style.css';
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -51,15 +50,6 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   }
 }));
 
-interface IComment {
-  id: number;
-  postID: number;
-  content: string;
-  authorName: string;
-  authorId: string;
-  created: Date;
-}
-
 interface Props {
   commentObject: IComment;
   getPosts: () => void;
@@ -77,8 +67,8 @@ const CommentCard: React.FC<Props> = ({ commentObject, getPosts }) => {
   };
   function handleUpdateComment() {
     setIsEdit(!isEdit);
-    if (rowNumber == 1) setRowNumber(3);
-    else if (rowNumber == 3) setRowNumber(1);
+    if (rowNumber === 1) setRowNumber(3);
+    else if (rowNumber === 3) setRowNumber(1);
   }
 
   function UpdateComment() {

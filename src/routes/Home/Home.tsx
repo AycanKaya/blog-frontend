@@ -1,13 +1,6 @@
-import Posts from "./Elements/Posts";
-import HomeResponsiveBar from "./HomeResponsiveBar";
-import "./style.css";
-const Home = () => {
-  return (
-    <>
-      <HomeResponsiveBar />
+import Posts from './Elements/Posts';
 
-      <Posts />
-    </>
-  );
+const Home = () => {
+  return <Posts />;
 };
 export default Home;

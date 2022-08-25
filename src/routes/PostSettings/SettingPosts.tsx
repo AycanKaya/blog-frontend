@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { get } from '../../../api/axios';
-import SetApprove from './SetApprove';
-import IPost from '../../../api/model/post';
+import { get } from '../../api/axios';
+import { SetApprove } from './SetApprove';
+import IPost from '../../api/model/post';
 import './style.css';
 interface IRow {
   authorName: string;
@@ -12,7 +12,7 @@ interface IRow {
   post: IPost;
 }
 
-const SettingPosts: React.FC = () => {
+export default function SettingPosts() {
   const [rowArray, setRowArray] = useState<IRow[]>([]);
 
   function getAllUserInfo() {
@@ -76,7 +76,7 @@ const SettingPosts: React.FC = () => {
       field: 'isApprove',
       width: 200,
       cellRenderer: (params: any) => {
-        return SetApprove(params.data, { getAllUserInfo });
+        return SetApprove({ params, getAllUserInfo });
       }
     }
   ];
@@ -92,5 +92,4 @@ const SettingPosts: React.FC = () => {
       </div>
     </div>
   );
-};
-export default SettingPosts;
+}

@@ -1,26 +1,27 @@
-import { post } from '../../../api/axios';
+import { post } from '../../api/axios';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Box, Fab } from '@mui/material';
-import React from 'react';
+import { PropsWithChildren } from 'react';
 
 interface Props {
+  params: any;
   getAllUserInfo: () => void;
 }
 
-const SetApprove: React.FC<Props> = (params: any, props: Props) => {
+export function SetApprove({ params, getAllUserInfo }: PropsWithChildren<Props>) {
   async function ActivateRequest(body: any) {
     await post('/EditorUser/ActivateControl', body).then((response) => {
       console.log(response);
-      props.getAllUserInfo();
+      getAllUserInfo();
     });
   }
 
   function handleConfirmClick() {
-    ActivateRequest({ postID: params.postId, isApprove: true });
+    ActivateRequest({ postID: params.data.postId, isApprove: true });
   }
   function handleCancelClick() {
-    ActivateRequest({ postID: params.postId, isApprove: false });
+    ActivateRequest({ postID: params.data.postId, isApprove: false });
   }
 
   return (
@@ -33,5 +34,4 @@ const SetApprove: React.FC<Props> = (params: any, props: Props) => {
       </Fab>
     </Box>
   );
-};
-export default SetApprove;
+}

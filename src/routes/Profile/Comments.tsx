@@ -1,29 +1,25 @@
-import { Typography, TextField, Button, alpha, InputBase, styled } from '@mui/material';
-
+import { Typography, TextField, Button } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useState } from 'react';
-import { post } from '../../../../api/axios';
-import Comment from './Comment';
-import IComment from '../../../../api/model/comment';
-
-interface Props {
-  postId: number;
-  comments: IComment[];
-  getRecentFivePosts: () => void; //ismi düzelt !!!!
-}
+import { PropsWithChildren, useState } from 'react';
+import { post } from '../../api/axios';
+import IComment from '../../api/model/comment';
+import CommentCard from '../BlogPage/BlogForm/WaitingAndCancelledPosts/Comment';
 
 interface requestBody {
   content: string;
   postID: number;
 }
-const options = ['Delete', 'Update'];
 
-const ITEM_HEIGHT = 48;
+interface Props {
+  postId: number;
+  comments: IComment[];
+  getRecentFivePosts: () => void;
+}
 
-const Comments: React.FC<Props> = ({ postId, comments, getRecentFivePosts }) => {
+export function Comments({ postId, comments, getRecentFivePosts }: PropsWithChildren<Props>) {
   const [reply, setReply] = useState('');
 
   const [body, setBody] = useState<requestBody>({
@@ -55,18 +51,9 @@ const Comments: React.FC<Props> = ({ postId, comments, getRecentFivePosts }) => 
     width: '500px'
   };
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const commentList = comments.map((comment: IComment) => (
     <div>
-      <Comment commentObject={comment} getPosts={getRecentFivePosts} />
+      <CommentCard commentObject={comment} getPosts={getRecentFivePosts} />
     </div>
   ));
 
@@ -103,5 +90,4 @@ const Comments: React.FC<Props> = ({ postId, comments, getRecentFivePosts }) => 
       </Button>
     </Accordion>
   );
-};
-export default Comments;
+}

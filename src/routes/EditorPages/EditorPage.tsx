@@ -1,10 +1,7 @@
-import ResponsiveAppBar from "./SetPostElements/EditorResponsiveBar";
-import SettingPosts from "./SetPostElements/SettingPosts";
-
+import SettingPosts from './SetPostElements/SettingPosts';
 const EditorPage = () => {
   return (
     <>
-      <ResponsiveAppBar />
       <SettingPosts />
     </>
   );

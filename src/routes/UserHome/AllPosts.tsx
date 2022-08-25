@@ -1,39 +1,18 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import { useEffect, useState } from 'react';
 import { Avatar, CardContent, CardHeader, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
 import './style.css';
-import { get } from '../../../../api/axios';
+import Comments from '../../routes/BlogPage/BlogForm/WaitingAndCancelledPosts/Comments';
+import IPostComments from '../../api/model/postComment';
+import PostTags from './PostTags';
 
-interface IPost {
-  id: number;
-  authorName: string;
-  authorEmail: string;
-  title: string;
-  content: string;
-  isApprove: boolean;
-  isDeleted: boolean;
-  isActive: boolean;
-  authorID: string;
-  createTime: Date;
-  updateTime: Date;
+interface Props {
+  postComments: IPostComments[];
+  getAllPosts: () => void;
 }
 
-export default function CancelledPosts() {
-  const [expanded, setExpanded] = useState(false);
-
-  const [posts, setPosts] = React.useState<IPost[]>([]);
-
-  function getPosts() {
-    get('/Post/CancelledPosts').then((response: any) => {
-      setPosts(response.posts.slice(0, 5));
-    });
-  }
-  useEffect(() => {
-    getPosts();
-  }, []);
-
+const AllPosts: React.FC<Props> = ({ postComments, getAllPosts }) => {
   const sx = {
     maxWidth: 'fit-content',
     marginLeft: '150px',
@@ -41,13 +20,13 @@ export default function CancelledPosts() {
     marginTop: '50px',
     padding: '10px'
   };
-  const postList = posts.map((post: IPost) => (
+  const postList = postComments.map((postComment: IPostComments) => (
     <>
       <Card sx={sx}>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            <p className="header1">{post.title}</p>
-            {post.content}
+            <p className="header1">{postComment.post.title}</p>
+            {postComment.post.content}
           </Typography>
           <CardHeader
             avatar={
@@ -67,8 +46,14 @@ export default function CancelledPosts() {
               float: 'right'
             }}
             titleTypographyProps={{ fontSize: '0.657rem' }}
-            title={'Written by ' + post.authorName}
-            subheader={post.authorEmail}
+            title={'Written by ' + postComment.post.authorName}
+            subheader={postComment.post.authorEmail}
+          />
+          <PostTags postId={postComment.post.postId} />
+          <Comments
+            comments={postComment.comments}
+            postId={postComment.post.postId}
+            getRecentFivePosts={getAllPosts}
           />
         </CardContent>
       </Card>
@@ -80,4 +65,5 @@ export default function CancelledPosts() {
       <div>{postList}</div>
     </>
   );
-}
+};
+export default AllPosts;
