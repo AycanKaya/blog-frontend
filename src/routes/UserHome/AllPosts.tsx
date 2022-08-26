@@ -3,9 +3,9 @@ import Card from '@mui/material/Card';
 import { Avatar, CardContent, CardHeader, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
 import './style.css';
-import Comments from '../../routes/BlogPage/BlogForm/WaitingAndCancelledPosts/Comments';
 import IPostComments from '../../api/model/postComment';
 import PostTags from './PostTags';
+import { Comments } from '../Profile/Comments';
 
 interface Props {
   postComments: IPostComments[];

@@ -6,7 +6,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { PropsWithChildren, useState } from 'react';
 import { post } from '../../api/axios';
 import IComment from '../../api/model/comment';
-import CommentCard from '../BlogPage/BlogForm/WaitingAndCancelledPosts/Comment';
+import CommentCard from '../../components/CommentCard/CommentCard';
 
 interface requestBody {
   content: string;

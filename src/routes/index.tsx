@@ -6,8 +6,9 @@ import UserHomePage from './UserHome';
 import ResponsiveAppBar from '../components/AppBar';
 import UserSettings from './UserSettings';
 import Dashboard from './Dashboard';
-import Profile from './Profile';
+
 import SettingPosts from './PostSettings';
+import SharePost from './SharePost';
 
 export default function Routes() {
   return (
@@ -26,7 +27,7 @@ export default function Routes() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="userSettings" element={<UserSettings />} />
         <Route path="editorPostSettings" element={<SettingPosts />} />
-        <Route path="sharePost" element={<Profile />} />
+        <Route path="sharePost" element={<SharePost />} />
         <Route path="home" element={<UserHomePage />} />
       </Route>
     </BaseRoutes>
