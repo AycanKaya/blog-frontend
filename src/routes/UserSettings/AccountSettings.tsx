@@ -87,15 +87,15 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
 
   const sx = {
     paddingRight: '5px',
-    borderRadius: '10px',
+    borderRadius: '8px',
     boxShadow: '#8F8CE7 0px 3px 8px',
     marginBottom: '10px'
   };
   return (
-    <>
+    <Box sx={{ marginLeft: '150px', marginRight: '100px', marginTop: '10px' }}>
       <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
         <div>
-          <FormControl sx={{ m: 0, width: '25ch' }} variant="outlined">
+          <FormControl sx={{ m: 0, width: '28ch' }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password" sx={{ position: 'center' }}>
               Old Password
             </InputLabel>
@@ -130,7 +130,7 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
 
       <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
         <div>
-          <FormControl sx={{ m: 0, width: '25ch' }} variant="outlined">
+          <FormControl sx={{ m: 0, width: '28ch' }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password" sx={{ position: 'center' }}>
               Password
             </InputLabel>
@@ -163,7 +163,7 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
 
       <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
         <div>
-          <FormControl sx={{ m: 0, width: '25ch' }} variant="outlined">
+          <FormControl sx={{ m: 0, width: '28ch' }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password" sx={{ position: 'center' }}>
               Confirm Password
             </InputLabel>
@@ -200,8 +200,7 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
         sx={{
           padding: '4px 20px',
           position: 'initial',
-          display: 'inline-table',
-          margin: '40px'
+          display: 'inline-table'
         }}
         size="large"
         color="primary"
@@ -225,7 +224,7 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
         endIcon={<EditIcon />}>
         EDIT
       </Button>
-    </>
+    </Box>
   );
 };
 export default AccountSettings;

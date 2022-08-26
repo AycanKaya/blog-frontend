@@ -1,4 +1,4 @@
-import { FormControl, TextField } from '@mui/material';
+import { Box, FormControl, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import './style.css';
 import Radio from '@mui/material/Radio';
@@ -11,6 +11,7 @@ import EditButton from '../../components/Buttons/EditButton';
 interface UserProps {
   userInfo: IUserInfo;
   editable: boolean;
+
   setUserInfo: React.Dispatch<React.SetStateAction<IUserInfo>>;
 }
 
@@ -67,7 +68,7 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, editable, setUserInfo 
   };
 
   return (
-    <>
+    <Box sx={{ marginLeft: '100px', marginRight: '100px', marginTop: '10px' }}>
       <div className="textDiv">
         <p className="social">Username : </p>
         <TextField
@@ -202,8 +203,8 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, editable, setUserInfo 
         />
       </div>
       <SaveButton userInfo={userInfo} edit={edit} setEdit={setEdit} />
-      <EditButton setEdit={setEdit} />
-    </>
+      <EditButton setEdit={setEdit} edit={edit} />
+    </Box>
   );
 };
 export default ProfileSettings;

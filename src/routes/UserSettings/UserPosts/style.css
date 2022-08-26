@@ -1,0 +1,47 @@
+.header {
+  color: #1b153d;
+  width: auto;
+  position: absolute;
+  display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  margin-top: 355px;
+  margin-left: 100px;
+}
+.header2 {
+  color: #1b153d;
+  width: auto;
+  position: absolute;
+  display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  margin-top: 385px;
+  margin-left: 100px;
+}
+.header3 {
+  color: #1b153d;
+  width: auto;
+  position: absolute;
+  display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  margin-top: 415px;
+  margin-left: 100px;
+}
+.header4 {
+  color: #1b153d;
+  width: auto;
+  position: absolute;
+  display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  margin-top: 445px;
+  margin-left: 100px;
+}
+
+.levelRight {
+  float: right;
+}
+.levelLeft {
+  float: left;
+}
