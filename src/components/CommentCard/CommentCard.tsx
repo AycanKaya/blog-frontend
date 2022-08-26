@@ -16,7 +16,6 @@ import IComment from '../../api/model/comment';
 
 import MenuForComment from '../Menu/MenuForComment';
 
-import './style.css';
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
     marginTop: theme.spacing(3)

@@ -1,15 +1,15 @@
-import { Typography, Card, CardHeader, CardContent, IconButton, Avatar } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { PropsWithChildren, useState } from 'react';
+import { Typography, Card, CardHeader, CardContent, Avatar, SxProps, Theme } from '@mui/material';
+import { PropsWithChildren } from 'react';
 import IPost from '../../api/model/post';
 import { red } from '@mui/material/colors';
 
 interface PostProps {
   post: IPost;
+  sx?: SxProps<Theme>;
 }
 
-export default function PostCard({ post }: PropsWithChildren<PostProps>) {
-  const sx = {
+export default function PostCard({ post, sx }: PropsWithChildren<PostProps>) {
+  const sxDefault = {
     maxWidth: 'fit-content',
     marginLeft: '150px',
     marginRight: '150px',
@@ -18,11 +18,23 @@ export default function PostCard({ post }: PropsWithChildren<PostProps>) {
   };
 
   return (
-    <Card sx={sx}>
+    <Card sx={sx || sxDefault}>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           <p className="header1">{post.title}</p>
-          {post.content}
+          {post.content?.length > 200 && (
+            <>
+              {post.content.substring(0, 200)}
+
+              <a href="#"> ...read more</a>
+            </>
+          )}
+          {post.content?.length < 200 && (
+            <>
+              {post.content}
+              <a href="#"> ...see more details</a>
+            </>
+          )}
         </Typography>
         <CardHeader
           avatar={

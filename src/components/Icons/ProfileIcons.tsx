@@ -40,10 +40,10 @@ const ProfileIcons: React.FC<PropsUser> = ({ userName }) => {
       <Avatar
         {...stringAvatar(userName)}
         sx={{
-          width: 200,
-          height: 200,
+          width: 180,
+          height: 180,
           position: 'absolute',
-          marginLeft: '120px',
+          marginLeft: '100px',
           marginTop: '130px',
           boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'
         }}

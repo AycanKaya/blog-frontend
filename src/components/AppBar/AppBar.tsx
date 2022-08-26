@@ -19,7 +19,7 @@ export interface PostValues {
   title: string;
   content: string;
 }
-const pages = ['Home Page', 'Profile'];
+const pages = ['Home Page', 'Share Post'];
 let settings = ['Settings'];
 
 const ResponsiveAppBar = () => {
@@ -62,7 +62,7 @@ const ResponsiveAppBar = () => {
     if (pages === 'Home Page') {
       navigate('../home');
     }
-    if (pages === 'Profile') {
+    if (pages === 'Share Post') {
       navigate('../sharePost');
     }
   };

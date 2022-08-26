@@ -3,12 +3,13 @@ import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 
 interface EditProps {
+  edit: boolean;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ButtonEditör: React.FC<EditProps> = ({ setEdit }) => {
+const ButtonEditör: React.FC<EditProps> = ({ edit, setEdit }) => {
   function handleEditableChange() {
-    setEdit(false);
+    setEdit(!edit);
   }
   const sx = {
     padding: '4px 20px',

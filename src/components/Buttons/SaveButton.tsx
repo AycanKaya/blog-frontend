@@ -19,7 +19,7 @@ const ButtonEditör: React.FC<UserProps> = ({ userInfo, edit, setEdit }) => {
 
   async function updateUserInformation() {
     await updateUser();
-    setEdit(true);
+    setEdit(!edit);
   }
   const sx = {
     padding: '4px 20px',
