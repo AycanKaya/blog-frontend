@@ -1,32 +1,70 @@
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { PropsWithChildren, useEffect, useState } from 'react';
+import { post } from '../../api/axios';
 import IComment from '../../api/model/comment';
 import CommentCard from './CommentCard';
 
 interface Props {
+  postID: number;
   comments: IComment[];
+  getComments: () => void;
 }
-export default function CommentBox({ comments }: PropsWithChildren<Props>) {
-  const [showedComment, setShowedComment] = useState<IComment[]>([]);
+export default function CommentBox({ comments, getComments, postID }: PropsWithChildren<Props>) {
+  const [showedComment, setShowedComment] = useState<JSX.Element[]>([]);
+  const [reply, setReply] = useState('');
+  const commentList = comments.map((comment: IComment) => (
+    <CommentCard comment={comment} getComments={getComments} />
+  ));
 
-  useEffect(() => {
-    setShowedComment(comments.slice(0, 5));
-  }, []);
+  const handleChange = (event: any) => {
+    setReply(event.target.value);
+  };
 
   function showCommentSet() {
     const last = showedComment.length;
-    setShowedComment(showedComment.concat(comments.slice(last, last + 4)));
-    console.log(setShowedComment);
+    setShowedComment(showedComment.concat(commentList.slice(last, last + 4)));
   }
-  const commentList = comments.map((comment: IComment) => {
-    <CommentCard comment={comment} />;
-  });
+  const onClick = () => {
+    post('/Comment/ShareComment', { content: reply, postID: postID })
+      .then((response) => {
+        setReply('');
+        getComments();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    setShowedComment(commentList.slice(0, 4));
+  }, [comments]);
 
-  // Bir buton daha ekle , gördüklerini azaltmak için
   return (
-    <>
-      {commentList}
-      {commentList.length > 5 && <Button onClick={showCommentSet}> See more </Button>}
-    </>
+    <div style={{ marginTop: '75px', width: '50%' }}>
+      {showedComment}
+      {commentList.length > 4 && <Button onClick={showCommentSet}> See more </Button>}
+
+      <TextField
+        fullWidth
+        multiline
+        placeholder="your reply"
+        id="fullWidth"
+        value={reply}
+        onChange={handleChange}
+      />
+
+      <Button
+        sx={{
+          float: 'right',
+          margin: '5px',
+          background: 'rgb(120, 86, 255)',
+          color: '#ffff',
+          borderWidth: '1px',
+          borderRadius: '9999px',
+          fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'
+        }}
+        onClick={onClick}>
+        Reply
+      </Button>
+    </div>
   );
 }
