@@ -39,7 +39,7 @@ export function CanceledPosts({ posts }: PropsWithChildren<Props>) {
     padding: '0px'
   };
 
-  const postList = posts.map((post: IPost) => <PostCard post={post} sx={sx} />);
+  const postList = posts.map((post: IPost) => <PostCard post={post} sx={sx} depth={180} />);
 
   return (
     <Stack spacing={2}>
@@ -50,12 +50,14 @@ export function CanceledPosts({ posts }: PropsWithChildren<Props>) {
         onChange={handleChange}
       />
       <Typography>{pageContent}</Typography>
-      <Pagination
-        sx={{ alignSelf: 'self-end' }}
-        count={pageCount}
-        page={page}
-        onChange={handleChange}
-      />
+      {pageCount > 1 && (
+        <Pagination
+          sx={{ alignSelf: 'self-end' }}
+          count={pageCount}
+          page={page}
+          onChange={handleChange}
+        />
+      )}
     </Stack>
   );
 }

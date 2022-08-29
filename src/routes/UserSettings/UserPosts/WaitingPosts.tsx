@@ -24,6 +24,7 @@ export function WaitingPosts({ posts }: PropsWithChildren<Props>) {
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
     setPageContent(postList.slice(indexOfFirstRecord, indexOfLastRecord));
+    console.log('PAGE COUNT: ', pageCount);
   };
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export function WaitingPosts({ posts }: PropsWithChildren<Props>) {
     padding: '0px'
   };
 
-  const postList = posts.map((post: IPost) => <PostCard post={post} sx={sx} />);
+  const postList = posts.map((post: IPost) => <PostCard post={post} sx={sx} depth={180} />);
 
   return (
     <Stack spacing={2}>
