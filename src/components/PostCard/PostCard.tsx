@@ -1,14 +1,25 @@
-import { Typography, Card, CardHeader, CardContent, Avatar, SxProps, Theme } from '@mui/material';
+import { Typography, Card, CardHeader, CardContent, SxProps, Theme, Link } from '@mui/material';
 import { PropsWithChildren } from 'react';
 import IPost from '../../api/model/post';
-import { red } from '@mui/material/colors';
+
+import { useNavigate } from 'react-router-dom';
 
 interface PostProps {
   post: IPost;
   sx?: SxProps<Theme>;
+  depth: number;
+  isDetail?: boolean;
 }
 
-export default function PostCard({ post, sx }: PropsWithChildren<PostProps>) {
+export default function PostCard({
+  post,
+  sx,
+  children,
+  depth,
+  isDetail
+}: PropsWithChildren<PostProps>) {
+  let navigate = useNavigate();
+
   const sxDefault = {
     maxWidth: 'fit-content',
     marginLeft: '150px',
@@ -22,33 +33,36 @@ export default function PostCard({ post, sx }: PropsWithChildren<PostProps>) {
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           <p className="header1">{post.title}</p>
-          {post.content?.length > 200 && (
+          {post.content?.length < depth && <>{post.content}</>}
+          {post.content?.length > depth && (
             <>
               {post.content.substring(0, 200)}
 
-              <a href="#"> ...read more</a>
+              <Link
+                component="button"
+                variant="body2"
+                onClick={() => navigate(`/post/${post.postId}`)}>
+                {' '}
+                ...read more
+              </Link>
             </>
           )}
-          {post.content?.length < 200 && (
+          {post.content?.length < depth && isDetail && (
             <>
               {post.content}
-              <a href="#"> ...see more details</a>
+              <Link
+                component="button"
+                variant="body2"
+                onClick={() => navigate(`/post/${post.postId}`)}>
+                {' '}
+                See more details
+              </Link>
             </>
           )}
         </Typography>
         <CardHeader
-          avatar={
-            <Avatar
-              sx={{
-                bgcolor: red[500],
-                width: '20px',
-                height: '20px'
-              }}
-              aria-label="recipe"></Avatar>
-          }
           sx={{
             bottom: 0,
-
             fontSize: '10px',
             width: 'auto',
             float: 'right'
@@ -57,6 +71,7 @@ export default function PostCard({ post, sx }: PropsWithChildren<PostProps>) {
           title={'Written by ' + post.authorName}
           subheader={post.authorEmail}
         />
+        {children}
       </CardContent>
     </Card>
   );
