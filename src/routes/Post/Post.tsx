@@ -37,9 +37,7 @@ export default function Post() {
   function getComments() {
     get('/Comment/GetComments?postId=' + params.postId).then((response) => {
       setComment(response.comments);
-      console.log('response.comments', response.comments);
     });
-    console.log('Post.tsx = ', comment);
   }
 
   useEffect(() => {

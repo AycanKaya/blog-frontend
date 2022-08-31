@@ -13,6 +13,7 @@ import IPost from '../../api/model/post';
 import { WaitingPosts } from './UserPosts/WaitingPosts';
 import { CanceledPosts } from './UserPosts/CanceledPosts';
 import { UserLevelInformation } from './UserPosts/UserLevelInformation';
+import { useLocation } from 'react-router-dom';
 
 const defaultUser: IUserInfo = {
   userID: '',
@@ -30,6 +31,8 @@ const defaultUser: IUserInfo = {
 };
 
 const UserSettings: React.FC = () => {
+  let location = useLocation();
+  var userEmail = location.state;
   const [value, setValue] = useState('1');
 
   const [edit, setEdit] = useState(true);
@@ -41,18 +44,22 @@ const UserSettings: React.FC = () => {
   const [waitingPosts, setWaitingPosts] = useState<IPost[]>([]);
   const [canceledPosts, setCanceledPosts] = useState<IPost[]>([]);
 
-  function getUserInfo() {
-    get('/Account/GetUserInfo').then((response: any) => {
+  async function getUserInfoByEmail() {
+    console.log('EMAIL', userEmail);
+    await get('/Account/GetUserInfo?email=' + String(userEmail)).then((response: any) => {
+      console.log('cevap', response.userInfo);
       setUserInfo(response.userInfo);
+      console.log(userInfo);
+      console.log('bak burda', String(userEmail));
     });
   }
   function getUserPosts() {
-    get('/Post/SharedPosts').then((response: any) => {
+    get('/Post/SharedPosts?email=' + String(userEmail)).then((response: any) => {
       setPosts(response.posts);
     });
   }
-  function getWaitingPosts() {
-    get('/Post/WaitingPosts').then((response: any) => {
+  async function getWaitingPosts() {
+    await get('/Post/WaitingPosts?email=' + String(userEmail)).then((response: any) => {
       setWaitingPosts(response.posts);
     });
   }
@@ -63,11 +70,11 @@ const UserSettings: React.FC = () => {
   }
 
   useEffect(() => {
-    getUserInfo();
+    getUserInfoByEmail();
     getUserPosts();
     getWaitingPosts();
     getCanceledPosts();
-  }, []);
+  }, [userEmail]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -77,16 +84,16 @@ const UserSettings: React.FC = () => {
     <>
       <ProfileIcons userName={userInfo.userName + ' ' + userInfo.surname} />
 
-      <UserLevelInformation />
+      <UserLevelInformation userEmail={String(userEmail)} />
       <Box
         sx={{
           marginTop: '20px',
           alignItems: 'center',
-          paddingLeft: '500px',
+          paddingLeft: '480px',
           paddingTop: '25px',
           display: 'inline-table',
           verticalAlign: 'baseline',
-          width: '600px'
+          width: '650px'
         }}>
         <Tabs
           onChange={handleChange}
@@ -94,10 +101,16 @@ const UserSettings: React.FC = () => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example">
           <Tab label="User Information Settings" value="1" />
-          <Tab label="Account Settings" value="2" />
+          {userInfo.userID === localStorage.getItem('id') && (
+            <Tab label="Account Settings" value="2" />
+          )}
           <Tab label="Shared Posts" value="3" />
-          <Tab label="Waiting Posts" value="4" />
-          <Tab label="Canceled Posts" value="5" />
+          {userInfo.userID === localStorage.getItem('id') && (
+            <Tab label="Waiting Posts" value="4" />
+          )}
+          {userInfo.userID === localStorage.getItem('id') && (
+            <Tab label="Canceled Posts" value="5" />
+          )}
         </Tabs>
       </Box>
       <Box

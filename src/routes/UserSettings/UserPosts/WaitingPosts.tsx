@@ -40,7 +40,7 @@ export function WaitingPosts({ posts }: PropsWithChildren<Props>) {
     padding: '0px'
   };
 
-  const postList = posts.map((post: IPost) => <PostCard post={post} sx={sx} depth={180} />);
+  const postList = posts.map((post: IPost) => <PostCard post={post} sx={sx} depth={140} />);
 
   return (
     <Stack spacing={2}>
