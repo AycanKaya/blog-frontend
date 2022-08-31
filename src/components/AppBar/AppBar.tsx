@@ -14,6 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import EmojiNatureIcon from '@mui/icons-material/EmojiNature';
 import Authenticate from './Authenticate';
 import { useEffect } from 'react';
+import IUserInfo from '../../api/model/userInfo';
 
 export interface PostValues {
   title: string;
@@ -25,7 +26,7 @@ let settings = ['Settings'];
 const ResponsiveAppBar = () => {
   const navigate = useNavigate();
 
-  const { isAuthenticate, setIsAuthenticate } = Authenticate();
+  const { isAuthenticate, setIsAuthenticate, user } = Authenticate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -47,7 +48,7 @@ const ResponsiveAppBar = () => {
       navigate('../login');
     }
     if (setting === 'Settings') {
-      navigate('../UserSettings');
+      if (user !== undefined) navigate(`../user/${user.userName}`, { state: user?.email });
     }
     if (setting === 'Dashboard') {
       navigate('../dashboard');
