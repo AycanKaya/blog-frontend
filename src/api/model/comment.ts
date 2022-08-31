@@ -4,5 +4,6 @@ export default interface IComment {
   content: string;
   authorName: string;
   authorId: string;
+  isDeleted: boolean;
   created: Date;
 }

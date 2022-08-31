@@ -6,8 +6,6 @@ export default interface IPost {
   content: string;
   isApprove: boolean;
   isDeleted: boolean;
-  isActive: boolean;
-  authorID: string;
   createTime: Date;
   updateTime: Date;
 }

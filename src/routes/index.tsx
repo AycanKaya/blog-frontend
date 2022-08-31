@@ -25,11 +25,11 @@ export default function Routes() {
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="userSettings" element={<UserSettings />} />
         <Route path="editorPostSettings" element={<SettingPosts />} />
         <Route path="sharePost" element={<SharePost />} />
         <Route path="home" element={<HomeUser />} />
         <Route path="post/:postId" element={<Post />} />
+        <Route path="user/:name" element={<UserSettings />} />
       </Route>
     </BaseRoutes>
   );

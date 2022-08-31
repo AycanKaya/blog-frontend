@@ -1,15 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: "https://localhost:44371/api",
+  baseURL: 'https://localhost:5001/api'
 });
 
-axiosInstance.defaults.headers.common["Content-Type"] = "application/json";
-
 function getHeaders() {
-  var myToken = "Bearer " + localStorage.getItem("jwToken");
+  var myToken = 'Bearer ' + localStorage.getItem('jwToken');
   const headers = {
-    Authorization: myToken,
+    Authorization: myToken
   };
   return headers;
 }
@@ -20,16 +18,16 @@ export async function request(
   body?: any,
   withoutHeader?: boolean
 ) {
-  if (requestType === "get") {
+  if (requestType === 'get') {
     await get(url, body);
   }
-  if (requestType === "get" && withoutHeader == true) {
+  if (requestType === 'get' && withoutHeader === true) {
     await getWithout(url);
   }
-  if (requestType === "post") {
+  if (requestType === 'post') {
     await post(url, body);
   }
-  if (requestType === "put") {
+  if (requestType === 'put') {
     await put(url, body);
   }
 }
@@ -37,7 +35,7 @@ export async function request(
 export async function post(url: string, body?: any) {
   var headers = getHeaders();
   const { data } = await axiosInstance.post(url, body, { headers });
-  if (data.succeeded == true) {
+  if (data.succeeded === true) {
     return data;
   }
   return data.Message;
@@ -46,7 +44,7 @@ export async function post(url: string, body?: any) {
 export async function deleted(url: string) {
   var headers = getHeaders();
   const { data } = await axiosInstance.delete(url, { headers });
-  if (data.succeeded == true) {
+  if (data.succeeded === true) {
     return data;
   }
   return data.Message;
@@ -55,14 +53,14 @@ export async function deleted(url: string) {
 export async function get(url: string, body?: string) {
   var headers = getHeaders();
   const { data } = await axiosInstance.get(url, { headers });
-  if (data.succeeded == true) {
+  if (data.succeeded === true) {
     return data;
   }
   return data.Message;
 }
 export async function getWithout(url: string) {
   const { data } = await axiosInstance.get(url);
-  if (data.succeeded == true) {
+  if (data.succeeded === true) {
     return data;
   }
   return data.Message;
@@ -71,7 +69,7 @@ export async function getWithout(url: string) {
 export async function put(url: string, body?: any) {
   var headers = getHeaders();
   const { data } = await axiosInstance.put(url, body, { headers });
-  if (data.succeeded == true) {
+  if (data.succeeded === true) {
     return data;
   }
   return data.Message;
