@@ -1,9 +1,9 @@
 import { Typography, Card, CardHeader, CardContent, SxProps, Theme, Link } from '@mui/material';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import IPost from '../../api/model/post';
 
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 interface PostProps {
   post: IPost;
   sx?: SxProps<Theme>;
@@ -19,7 +19,12 @@ export default function PostCard({
   isDetail
 }: PropsWithChildren<PostProps>) {
   let navigate = useNavigate();
-
+  let location = useLocation();
+  const history = createBrowserHistory();
+  if (history.location && history.location.state) {
+    history.replace({ ...history.location });
+  }
+  window.history.replaceState({}, document.title);
   const sxDefault = {
     maxWidth: 'fit-content',
     marginLeft: '150px',
@@ -69,8 +74,21 @@ export default function PostCard({
           }}
           titleTypographyProps={{ fontSize: '0.657rem' }}
           title={'Written by ' + post.authorName}
-          subheader={post.authorEmail}
+          subheader={
+            <Link
+              component="button"
+              variant="body2"
+              onClick={() => {
+                if (location.state) {
+                  delete location.state;
+                }
+                navigate(`../user/${post.authorName}`, { state: post.authorEmail });
+              }}>
+              {post.authorEmail}
+            </Link>
+          }
         />
+
         {children}
       </CardContent>
     </Card>
