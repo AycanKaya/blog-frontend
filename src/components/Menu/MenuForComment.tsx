@@ -64,7 +64,6 @@ const MenuForComment: React.FC<Props> = ({
   const [errorMessage, setErrorMessage] = React.useState('');
   function DeleteComment() {
     console.log('DELETE COMMENT ', commentId);
-
     deleted('/Comment/DeleteComment?commentID=' + commentId)
       .then((response) => {
         console.log(response);

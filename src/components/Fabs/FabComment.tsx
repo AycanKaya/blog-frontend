@@ -1,21 +1,30 @@
 import { Fab } from '@mui/material';
+import { request } from 'http';
 import { PropsWithChildren } from 'react';
 import { put } from '../../api/axios';
 import IComment from '../../api/model/comment';
 
 interface Props {
-  comment: IComment;
+  commentId: number;
+  commentContent: string;
   edit: boolean;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function FabComment({ comment, edit, setEdit }: PropsWithChildren<Props>) {
+export default function FabComment({
+  commentId,
+  commentContent,
+  edit,
+  setEdit
+}: PropsWithChildren<Props>) {
+  const requestBody = {
+    commentID: commentId,
+    content: commentContent
+  };
   function UpdateComment() {
-    put('/Comment/UpdateComment', {
-      commentID: comment.id,
-      content: comment.content
-    }).then((response) => {
-      console.log('COMMENT İSTEĞİNİ TEKRAR AT');
+    put('/Comment/UpdateComment', requestBody).then((response) => {
+      console.log(response);
+      console.log(requestBody);
       setEdit(!edit);
     });
   }

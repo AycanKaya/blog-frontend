@@ -11,7 +11,7 @@ function stringToColor(string: string) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
 
-  let color = '#';
+  let color = '#E6E6FA';
 
   for (i = 0; i < 3; i += 1) {
     const value = (hash >> (i * 8)) & 0xff;
@@ -40,12 +40,13 @@ const ProfileIcons: React.FC<PropsUser> = ({ userName }) => {
       <Avatar
         {...stringAvatar(userName)}
         sx={{
-          width: 180,
-          height: 180,
+          width: 150,
+          height: 150,
           position: 'absolute',
           marginLeft: '100px',
-          marginTop: '130px',
-          boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'
+          marginTop: '100px',
+          boxShadow: '#f5ebe0',
+          backgroundColor: '#d6ccc2'
         }}
       />
     </Stack>

@@ -10,6 +10,12 @@ interface Props {
 }
 export default function CommentCard({ comment, getComments }: PropsWithChildren<Props>) {
   const [edit, setEdit] = useState(true);
+  const [commentContent, setCommentContent] = useState(comment.content);
+
+  function handleChange(event: any) {
+    setCommentContent(event.target.value);
+  }
+
   function handleUpdateComment() {
     setEdit(!edit);
   }
@@ -53,7 +59,8 @@ export default function CommentCard({ comment, getComments }: PropsWithChildren<
         <CardContent sx={{ padding: '15px', minWidth: '400px' }}>
           <TextField
             id="standard-size-normal"
-            defaultValue={comment.content}
+            defaultValue={commentContent}
+            onChange={handleChange}
             variant="standard"
             InputProps={{
               disableUnderline: true
@@ -62,7 +69,12 @@ export default function CommentCard({ comment, getComments }: PropsWithChildren<
             sx={{ paddingTop: '0px' }}
           />
           {localStorage.getItem('id') === comment.authorId && !edit && (
-            <FabComment comment={comment} edit={edit} setEdit={setEdit} />
+            <FabComment
+              commentId={comment.id}
+              commentContent={commentContent}
+              edit={edit}
+              setEdit={setEdit}
+            />
           )}
         </CardContent>
       </Card>
