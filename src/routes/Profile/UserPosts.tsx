@@ -5,10 +5,10 @@ import { CardContent } from '@mui/material';
 
 import { get } from '../../api/axios';
 import { Comments } from './Comments';
-import PostTags from '../UserHome/PostTags';
+import { PostTags } from '../HomeUser/PostTags';
 import IPost from '../../api/model/post';
 import IComment from '../../api/model/comment';
-import Posts from '../UserHome/Posts';
+import { Posts } from '../HomeUser/Posts';
 
 interface IPostComments {
   post: IPost;
@@ -39,7 +39,6 @@ export function UserPosts() {
     <>
       <Card sx={sx}>
         <CardContent>
-          <Posts Post={postComment.post} getUserPosts={getUserPosts} />
           <PostTags postId={postComment.post.postId} />
           <Comments
             comments={postComment.comments}

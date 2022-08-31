@@ -19,7 +19,7 @@ export function CancelledPosts() {
 
   const postList = posts.map((post: IPost) => (
     <>
-      <PostCard post={post} />
+      <PostCard post={post} depth={180} />
     </>
   ));
 

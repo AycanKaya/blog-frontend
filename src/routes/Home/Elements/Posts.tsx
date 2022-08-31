@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 import { Avatar, CardContent, CardHeader, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
 import './style.css';
-import Comments from '../../BlogPage/BlogForm/WaitingAndCancelledPosts/Comments';
 import IPostComments from '../../../api/model/postComment';
+import { Comments } from '../../Profile/Comments';
 
 const Posts: React.FC = () => {
   const [postComments, setPostComments] = React.useState<IPostComments[]>([]);
