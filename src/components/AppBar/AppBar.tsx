@@ -45,7 +45,7 @@ const ResponsiveAppBar = () => {
       localStorage.clear();
       settings = ['Settings'];
 
-      navigate('../login');
+      navigate('../');
     }
     if (setting === 'Settings') {
       if (user !== undefined) navigate(`../user/${user.userName}`, { state: user?.email });
@@ -162,13 +162,29 @@ const ResponsiveAppBar = () => {
             )}
 
             {!isAuthenticate && (
-              <Box sx={{ flexGrow: 0, flex: 'right', vertical: 'top', horizontal: 'right' }}>
-                <Link to="register">
-                  <Button color="neutral">Sign Up</Button>
-                </Link>
-                <Link to="login">
-                  <Button color="neutral">Login</Button>
-                </Link>
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: { xs: 'none', md: 'flex' },
+                  vertical: 'top',
+                  horizontal: 'right',
+                  justifyContent: 'right'
+                }}>
+                <Button
+                  sx={{ border: '2px solid', color: '#D8DCD6', marginRight: '10px' }}
+                  onClick={() => {
+                    navigate('../register');
+                  }}>
+                  Sign Up
+                </Button>
+
+                <Button
+                  sx={{ border: '2px solid', color: '#D8DCD6' }}
+                  onClick={() => {
+                    navigate('../login');
+                  }}>
+                  Login
+                </Button>
               </Box>
             )}
           </Toolbar>
@@ -177,5 +193,5 @@ const ResponsiveAppBar = () => {
     </Box>
   );
 };
-
+// //justify-content: right
 export default ResponsiveAppBar;
