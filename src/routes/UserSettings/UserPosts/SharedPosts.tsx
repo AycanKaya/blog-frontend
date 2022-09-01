@@ -31,10 +31,8 @@ export function SharedPosts({ posts }: PropsWithChildren<Props>) {
   }, [page]);
 
   const sx = {
-    maxWidth: '600px',
-    minWidth: '600px',
-    marginLeft: '80px',
-    marginRight: '80px',
+    maxWidth: '700px',
+    minWidth: '700px',
     marginTop: '10px',
     padding: '0px'
   };

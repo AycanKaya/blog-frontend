@@ -202,8 +202,12 @@ const ProfileSettings: React.FC<UserProps> = ({ userInfo, editable, setUserInfo 
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleAddressChange(event)}
         />
       </div>
-      <SaveButton userInfo={userInfo} edit={edit} setEdit={setEdit} />
-      <EditButton setEdit={setEdit} edit={edit} />
+      {userInfo.userID === localStorage.getItem('id') && (
+        <>
+          <SaveButton userInfo={userInfo} edit={edit} setEdit={setEdit} />
+          <EditButton setEdit={setEdit} edit={edit} />
+        </>
+      )}
     </Box>
   );
 };

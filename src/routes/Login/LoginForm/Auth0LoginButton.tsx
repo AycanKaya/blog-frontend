@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import Button from '@mui/material/Button';
 
 export default function Auth0LoginButton() {
   const { loginWithRedirect } = useAuth0();
@@ -14,8 +15,8 @@ export default function Auth0LoginButton() {
   };
 
   return (
-    <button className="button__login" onClick={handleLogin}>
-      Log In
-    </button>
+    <Button variant="contained" type="submit" onClick={handleLogin}>
+      Log In With
+    </Button>
   );
 }

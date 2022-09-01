@@ -45,12 +45,8 @@ const UserSettings: React.FC = () => {
   const [canceledPosts, setCanceledPosts] = useState<IPost[]>([]);
 
   async function getUserInfoByEmail() {
-    console.log('EMAIL', userEmail);
     await get('/Account/GetUserInfo?email=' + String(userEmail)).then((response: any) => {
-      console.log('cevap', response.userInfo);
       setUserInfo(response.userInfo);
-      console.log(userInfo);
-      console.log('bak burda', String(userEmail));
     });
   }
   function getUserPosts() {
@@ -87,10 +83,9 @@ const UserSettings: React.FC = () => {
       <UserLevelInformation userEmail={String(userEmail)} />
       <Box
         sx={{
-          marginTop: '20px',
           alignItems: 'center',
           paddingLeft: '480px',
-          paddingTop: '25px',
+          paddingTop: '20px',
           display: 'inline-table',
           verticalAlign: 'baseline',
           width: '650px'
@@ -117,7 +112,7 @@ const UserSettings: React.FC = () => {
         sx={{
           alignItems: 'center',
           paddingLeft: '500px',
-          paddingTop: '25px',
+
           display: 'inline-table',
           verticalAlign: 'baseline'
         }}>

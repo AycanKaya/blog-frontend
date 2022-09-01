@@ -82,7 +82,7 @@ export default function LoginForm(props: LoginProps) {
               value={formik.values.password}
             />
             <Button variant="contained" type="submit">
-              Giriş Yap
+              LOGIN
             </Button>
             <Auth0LoginButton />
           </Box>
