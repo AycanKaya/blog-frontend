@@ -82,7 +82,7 @@ export default function PostCard({
                 if (location.state) {
                   delete location.state;
                 }
-                navigate(`../user/${post.authorName}`, { state: post.authorEmail });
+                navigate(`../user/${post.authorID}`);
               }}>
               {post.authorEmail}
             </Link>

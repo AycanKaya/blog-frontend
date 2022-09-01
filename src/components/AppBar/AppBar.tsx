@@ -48,7 +48,7 @@ const ResponsiveAppBar = () => {
       navigate('../');
     }
     if (setting === 'Settings') {
-      if (user !== undefined) navigate(`../user/${user.userName}`, { state: user?.email });
+      if (user !== undefined) navigate(`../user/${user.userID}`);
     }
     if (setting === 'Dashboard') {
       navigate('../dashboard');
