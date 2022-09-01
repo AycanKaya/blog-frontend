@@ -1,21 +1,21 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import { getWithout } from '../../../api/axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Avatar, CardContent, CardHeader, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
 import './style.css';
-import IPostComments from '../../../api/model/postComment';
-import { Comments } from '../../Profile/Comments';
+import IPost from '../../../api/model/post';
 
 const Posts: React.FC = () => {
-  const [postComments, setPostComments] = React.useState<IPostComments[]>([]);
+  const [posts, setPosts] = useState<IPost[]>([]);
 
   function getRecentFivePosts() {
-    getWithout('/Post/PostComments').then((response: any) => {
-      setPostComments(response.posts.slice(0, 5));
+    getWithout('/Post/AllPosts').then((response: any) => {
+      setPosts(response.posts.slice(0, 5));
     });
   }
+
   useEffect(() => {
     getRecentFivePosts();
   }, []);
@@ -27,13 +27,13 @@ const Posts: React.FC = () => {
     marginTop: '50px',
     padding: '10px'
   };
-  const postList = postComments.map((postComment: IPostComments) => (
+  const postList = posts.map((post: IPost) => (
     <>
       <Card sx={sx}>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            <p className="header1">{postComment.post.title}</p>
-            {postComment.post.content}
+            <p className="header1">{post.title}</p>
+            {post.content}
           </Typography>
           <CardHeader
             avatar={
@@ -53,14 +53,8 @@ const Posts: React.FC = () => {
               float: 'right'
             }}
             titleTypographyProps={{ fontSize: '0.657rem' }}
-            title={'Written by ' + postComment.post.authorName}
-            subheader={postComment.post.authorEmail}
-          />
-
-          <Comments
-            comments={postComment.comments}
-            postId={postComment.post.postId}
-            getRecentFivePosts={getRecentFivePosts}
+            title={'Written by ' + post.authorName}
+            subheader={post.authorEmail}
           />
         </CardContent>
       </Card>

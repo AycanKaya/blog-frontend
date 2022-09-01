@@ -23,7 +23,7 @@ export function Posts({ postList }: PropsWithChildren<Props>) {
   }, [indexOfFirstRecord, indexOfLastRecord, postList]);
 
   return (
-    <Stack spacing={2}>
+    <Stack>
       <Pagination
         sx={{ alignSelf: 'self-start', marginLeft: '150px' }}
         count={pageCount}
@@ -33,7 +33,7 @@ export function Posts({ postList }: PropsWithChildren<Props>) {
       <Typography>{pageContent}</Typography>
       {pageCount > 1 && (
         <Pagination
-          sx={{ marginLeft: '150px', alignSelf: 'self-start' }}
+          sx={{ marginTop: '16px', marginLeft: '150px', alignSelf: 'self-start' }}
           count={pageCount}
           page={page}
           onChange={handleChange}
