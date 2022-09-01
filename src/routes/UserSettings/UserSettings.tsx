@@ -13,7 +13,7 @@ import IPost from '../../api/model/post';
 import { WaitingPosts } from './UserPosts/WaitingPosts';
 import { CanceledPosts } from './UserPosts/CanceledPosts';
 import { UserLevelInformation } from './UserPosts/UserLevelInformation';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 const defaultUser: IUserInfo = {
   userID: '',
@@ -32,6 +32,7 @@ const defaultUser: IUserInfo = {
 
 const UserSettings: React.FC = () => {
   let location = useLocation();
+  let params = useParams();
   var userEmail = location.state;
   const [value, setValue] = useState('1');
 
@@ -45,17 +46,19 @@ const UserSettings: React.FC = () => {
   const [canceledPosts, setCanceledPosts] = useState<IPost[]>([]);
 
   async function getUserInfoByEmail() {
-    await get('/Account/GetUserInfo?email=' + String(userEmail)).then((response: any) => {
+    console.log('params', params);
+    console.log('params od', params.userID);
+    await get('/Account/GetUserInfo?id=' + params.userID).then((response: any) => {
       setUserInfo(response.userInfo);
     });
   }
   function getUserPosts() {
-    get('/Post/SharedPosts?email=' + String(userEmail)).then((response: any) => {
+    get('/Post/SharedPosts?id=' + params.userID).then((response: any) => {
       setPosts(response.posts);
     });
   }
   async function getWaitingPosts() {
-    await get('/Post/WaitingPosts?email=' + String(userEmail)).then((response: any) => {
+    await get('/Post/WaitingPosts?id=' + params.userID).then((response: any) => {
       setWaitingPosts(response.posts);
     });
   }
@@ -80,7 +83,7 @@ const UserSettings: React.FC = () => {
     <>
       <ProfileIcons userName={userInfo.userName + ' ' + userInfo.surname} />
 
-      <UserLevelInformation userEmail={String(userEmail)} />
+      <UserLevelInformation userID={String(params.userID)} />
       <Box
         sx={{
           alignItems: 'center',
@@ -91,7 +94,10 @@ const UserSettings: React.FC = () => {
           width: '650px'
         }}>
         <Tabs
+          value={value}
           onChange={handleChange}
+          textColor="primary"
+          indicatorColor="primary"
           variant="scrollable"
           scrollButtons="auto"
           aria-label="scrollable auto tabs example">

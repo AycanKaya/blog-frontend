@@ -29,7 +29,7 @@ export default function Routes() {
         <Route path="sharePost" element={<SharePost />} />
         <Route path="home" element={<HomeUser />} />
         <Route path="post/:postId" element={<Post />} />
-        <Route path="user/:name" element={<UserSettings />} />
+        <Route path="user/:userID" element={<UserSettings />} />
       </Route>
     </BaseRoutes>
   );

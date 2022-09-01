@@ -92,7 +92,7 @@ const AccountSettings: React.FC<UserProps> = ({ userInfo }) => {
     marginBottom: '10px'
   };
   return (
-    <Box sx={{ marginLeft: '150px', marginRight: '100px', marginTop: '10px' }}>
+    <Box sx={{ marginLeft: '150px', marginRight: '100px', marginTop: '50px' }}>
       <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
         <div>
           <FormControl sx={{ m: 0, width: '28ch' }} variant="outlined">

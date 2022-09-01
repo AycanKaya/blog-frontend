@@ -17,6 +17,7 @@ export default function Post() {
   let params = useParams();
   const [post, setPost] = useState<IPost>({
     postId: 0,
+    authorID: '',
     authorName: '',
     authorEmail: '',
     title: '',

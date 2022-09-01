@@ -4,13 +4,13 @@ import { get } from '../../../api/axios';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { Level } from '../../../api/model/level';
 interface Props {
-  userEmail: string;
+  userID: string;
 }
-export function UserLevelInformation({ userEmail }: PropsWithChildren<Props>) {
+export function UserLevelInformation({ userID }: PropsWithChildren<Props>) {
   const [level, setLevel] = useState<Level>();
 
   function userLevel() {
-    get('/Account/GetAccountLevel?email=' + userEmail).then((response) => {
+    get('/Account/GetAccountLevel?id=' + userID).then((response) => {
       setLevel(response.level);
     });
   }
