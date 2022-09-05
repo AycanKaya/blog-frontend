@@ -73,7 +73,7 @@ const UserSettings: React.FC = () => {
     getUserPosts();
     getWaitingPosts();
     getCanceledPosts();
-  }, [userEmail]);
+  }, [params.userID]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);

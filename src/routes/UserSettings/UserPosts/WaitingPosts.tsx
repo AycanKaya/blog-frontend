@@ -14,7 +14,7 @@ export function WaitingPosts({ posts }: PropsWithChildren<Props>) {
   const [page, setPage] = useState(1);
 
   const [pageContent, setPageContent] = useState<JSX.Element[]>([]);
-  // No of Records to be displayed on each page
+
   const [recordsPerPage] = useState(5);
   const indexOfLastRecord = page * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
