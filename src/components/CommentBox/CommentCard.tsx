@@ -59,14 +59,15 @@ export default function CommentCard({ comment, getComments }: PropsWithChildren<
         <CardContent sx={{ padding: '15px', minWidth: '400px' }}>
           <TextField
             id="standard-size-normal"
+            multiline
             defaultValue={commentContent}
             onChange={handleChange}
             variant="standard"
             InputProps={{
-              disableUnderline: true
+              disableUnderline: edit
             }}
             disabled={edit}
-            sx={{ paddingTop: '0px' }}
+            sx={{ paddingTop: '0px', minWidth: '350px' }}
           />
           {localStorage.getItem('id') === comment.authorId && !edit && (
             <FabComment
