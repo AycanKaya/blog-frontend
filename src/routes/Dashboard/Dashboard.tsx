@@ -15,12 +15,14 @@ import CountryCellEditor from '../../components/AgGridCells/CountryCellEditor';
 import AddressCellEditor from '../../components/AgGridCells/AddressCellEditor';
 import ButtonEditor from '../../components/AgGridCells/ButtonEditor';
 import './style.css';
+import LevelCellEditor from '../../components/AgGridCells/LevelCellEditor';
 
 interface IRow {
   userID: string;
   userName: string;
   name: string;
   surname: string;
+  level: string;
   role: string;
   gender: string;
   birthDay: Date;
@@ -86,6 +88,13 @@ export default function Dashboard() {
       width: 100,
       cellRenderer: (params: any) => {
         return RoleCellEditor(params.data);
+      }
+    },
+    {
+      field: 'level',
+      width: 100,
+      cellRenderer: (params: any) => {
+        return LevelCellEditor(params.data);
       }
     },
     {
