@@ -38,7 +38,15 @@ export default function FabComment({
         width: '60px',
         height: '40px',
         marginBottom: '10px',
-        boxShadow: '0'
+        marginTop: '10px',
+        boxShadow: '0',
+        background: '#3c52b2bf',
+        color: '#ffff',
+        '&:hover': {
+          backgroundColor: '#3c52b2',
+          color: '#ffff'
+        },
+        marginLeft: '340px'
       }}
       disabled={edit}
       onClick={UpdateComment}>

@@ -7,6 +7,7 @@ import { deleted } from '../../api/axios';
 import DialogMessage from '../Messages/DialogMessage';
 import { SnackbarOrigin } from '@mui/material';
 import ErrorMessages from '../Messages/ErrorMessages';
+import { useState } from 'react';
 
 const options = ['Delete', 'Update'];
 
@@ -27,13 +28,13 @@ const MenuForComment: React.FC<Props> = ({
   getComments,
   handleUpdateComment
 }) => {
-  const [openDialog, setOpenDialog] = React.useState(false);
-  const [errorState, setErrorState] = React.useState<State>({
+  const [openDialog, setOpenDialog] = useState(false);
+  const [errorState, setErrorState] = useState<State>({
     open: false,
     vertical: 'top',
     horizontal: 'center'
   });
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -61,25 +62,16 @@ const MenuForComment: React.FC<Props> = ({
     }
   };
 
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   function DeleteComment() {
     console.log('DELETE COMMENT ', commentId);
     deleted('/Comment/DeleteComment?commentID=' + commentId)
       .then((response) => {
-        console.log(response);
-        if (!response.succeeded) {
-          setErrorMessage(response.err);
-          handleError({
-            vertical: 'top',
-            horizontal: 'center'
-          });
-          setErrorState({ ...errorState, open: true });
-        } else {
+        if (response.succeeded) {
           getComments();
         }
       })
       .catch((err) => {
-        console.log('ERROR', err);
         setErrorMessage(err.response.data.Error);
         handleError({
           vertical: 'top',
