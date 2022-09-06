@@ -17,6 +17,12 @@ export default function CommentBox({ comments, getComments, postID }: PropsWithC
     <CommentCard comment={comment} getComments={getComments} />
   ));
 
+  function updateCommentList(commentList: JSX.Element[]) {
+    commentList = comments.map((comment: IComment) => (
+      <CommentCard comment={comment} getComments={getComments} />
+    ));
+  }
+
   const handleChange = (event: any) => {
     setReply(event.target.value);
   };
@@ -40,6 +46,7 @@ export default function CommentBox({ comments, getComments, postID }: PropsWithC
       });
   };
   useEffect(() => {
+    updateCommentList(commentList);
     setShowedComment(commentList.slice(0, 4));
   }, [comments]);
 
@@ -67,11 +74,15 @@ export default function CommentBox({ comments, getComments, postID }: PropsWithC
         sx={{
           float: 'right',
           margin: '5px',
-          background: 'rgb(120, 86, 255)',
+          background: '#3c52b2bf',
           color: '#ffff',
           borderWidth: '1px',
           borderRadius: '9999px',
-          fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'
+          fontFamily: 'Verdana, Geneva, Tahoma, sans-serif',
+          '&:hover': {
+            backgroundColor: '#3c52b2',
+            color: '#ffff'
+          }
         }}
         onClick={onClick}>
         Reply
