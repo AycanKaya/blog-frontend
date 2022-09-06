@@ -3,7 +3,7 @@ import RegisterForm from '../../routes/Register/RegisterForm/RegisterForm';
 import { LoginValues } from '../../routes/Login/LoginForm/LoginForm';
 import { RegisterValues } from '../../routes/Register/RegisterForm/RegisterForm';
 import { useNavigate } from 'react-router-dom';
-import { post, get } from '../../api/axios';
+import { post } from '../../api/axios';
 
 export default function Login() {
   let navigate = useNavigate();
@@ -27,7 +27,12 @@ export function Register() {
   }
 
   async function handleSubmit(values: RegisterValues) {
-    const response = await post('/Account/register', values);
+    const response = await post('/Account/register', {
+      email: values.email,
+      username: values.username,
+      password: values.password
+    });
+    console.log(response);
     if (response.succeeded) {
       navigate('../login');
     }
