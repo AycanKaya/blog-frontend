@@ -3,12 +3,12 @@ import Home from './Home';
 import Login from './Login';
 import { Register } from './Register';
 import ResponsiveAppBar from '../components/AppBar';
-import UserSettings from './UserSettings';
 import Dashboard from './Dashboard';
 import SettingPosts from './PostSettings';
 import SharePost from './SharePost';
 import Post from './Post/Post';
 import HomeUser from './HomeUser';
+import UserSettings from './UserSettings/UserSettings';
 
 export default function Routes() {
   return (

@@ -4,12 +4,15 @@ import PostCard from '../../../components/PostCard/PostCard';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   posts: IPost[];
 }
 
 export function WaitingPosts({ posts }: PropsWithChildren<Props>) {
+  let navigate = useNavigate();
   // User is currently on this page
   const [page, setPage] = useState(1);
 
@@ -48,7 +51,12 @@ export function WaitingPosts({ posts }: PropsWithChildren<Props>) {
         page={page}
         onChange={handleChange}
       />
-      <Typography>{pageContent}</Typography>
+      {posts !== null && <Typography>{pageContent}</Typography>}
+      {posts.length === 0 && (
+        <Typography sx={{ minWidth: 'fit-content' }}>
+          <p style={{ fontFamily: ' Verdana, Geneva, Tahoma, sans-serif' }}>No pending posts.</p>
+        </Typography>
+      )}
       {pageCount > 1 && (
         <Pagination
           sx={{ alignSelf: 'self-end' }}
